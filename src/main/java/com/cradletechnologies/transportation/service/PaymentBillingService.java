@@ -16,21 +16,17 @@ public interface PaymentBillingService {
 	
 	void fillBillingToPaymentBilling();
 	
-	void fillSaleToPaymentBilling();
-	
 	List<PaymentBilling> listPaymentBilling();
 	
 	List<ClientsList_Report> getClientsListReport();
-	
-//	ProductSales findClient(int id);	
-	
+		
 	int countClients();
 	
-	Double totalRevenue();
+//	Double totalRevenue();
+//	
+//	Double totalInvoices();
 	
-	Double totalInvoices();
-	
-	Double bookBalance();
+//	Double bookBalance();
 	
 	ClientsList_Report getClientReport(int clientId);
 	

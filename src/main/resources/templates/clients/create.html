@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en" 
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layouts/main_layout}">
+    <head>
+        <title>New Partner</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    </head>
+    <body>
+        <div layout:fragment="breadcrumb">
+            <div class="col-sm-6">
+                <h1>Partners</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a th:href="@{/partners/index}" >Partners</a></li>
+                    <li class="breadcrumb-item active">New Partner</li>
+                </ol>
+            </div>
+        </div>
+        <div  layout:fragment="content">
+            <div class="card card-info">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-plus"></i>
+                        New Partner
+                    </h3>
+                </div>
+                <form th:action="@{/partners/create}" th:object="${partnersDTO}" method="POST" enctype="multipart/form-data">
+                    <div class="card-body">  
+                        <div class="row"> 
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="firstName">First Name</label>
+                                    <input class="form-control" type="text" th:field="*{firstName}" id="firstName" placeholder="enter first name" />
+                                    <div class="alert alert-danger" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></div>
+                                </div>
+                            </div> 
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="lastName">Last Name</label>
+                                    <input class="form-control" type="text" th:field="*{lastName}" id="lastName" placeholder="enter last name" />
+                                    <div class="alert alert-danger" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></div>
+                                </div>
+                            </div>
+                         
+                         	<div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="partnername">Partner Name</label>
+                                    <input class="form-control" type="text" th:field="*{partnername}" id="partnername" placeholder="enter partner name" />
+                                    <div class="alert alert-danger" th:if="${#fields.hasErrors('partnername')}" th:errors="*{partnername}"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="email">Email Address</label>
+                                    <input class="form-control" type="text" th:field="*{email}" id="email" placeholder="enter email" />
+                                    <div class="alert alert-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-sm-3"> 
+		                        <div class="form-group">		                            
+		                            <label class="mx-0" style="font-weight:bold;">Status</label> 
+									<select id="status" name="status" th:field="*{status}" class="form-control col-xs-12 mb-2"  required="true" />
+										<option th:value="''" >Select Status</option>
+										<option th:value="ACTIVE" th:text="ACTIVE" th:selected="ACTIVE == *{status}"></option>
+					        			<option th:value="DORMANT" th:text="DORMANT" th:selected="DORMANT == *{status}"></option>	 
+									</select>		                            
+		                            <div class="alert alert-danger" th:if="${#fields.hasErrors('status')}" th:errors="*{status}"></div>
+		                        </div>
+		                     </div>
+		                                                 
+		                     <div class="col-md-3">
+	                            <div class="form-group">
+		                            <label class="mx-0" style="font-weight:bold;">Partnership</label> 
+									<select id="partnership_Id" name="partnershipId" th:field="*{partnerships}" class="form-control col-xs-12 mb-3"  required="true" />
+										<option th:value="''" >Select Partnership</option>
+										<option th:each="partnership : ${listPartnerships}" th:value="${partnership.id}" th:text="${partnership.name}" th:selected="${partnership.id} == *{partnerships}"></option>	 
+									</select>	
+		                            <div class="alert alert-danger" th:if="${#fields.hasErrors('partnerships')}" th:errors="*{partnerships}"></div>
+		                        </div>
+		                    </div>
+		                    
+                            <div class="col-md-3">                            
+                                <div class="form-group">
+                                    <label for="partnerLogo">Partner Logo</label>
+                                    <input class="form-control" type="file" th:field="*{partnerLogo}" id="partnerLogo" placeholder="enter partner's picture"  accept="image/png, image/jpeg" />
+                                    <div class="alert alert-danger" th:if="${#fields.hasErrors('partnerLogo')}" th:errors="*{partnerLogo}"></div>
+                                </div>
+                            </div>
+                         
+                            <div class="col-md-6">                            
+                                <div class="form-group">
+                                    <p class="card" style="height:200px; overflow:scroll;">
+										<img class="text-center my-auto" id="thumbnail" th:src="@{*{getPartnerLogoPath}}" style="width:100%;" alt="partner_logo" />																	      
+									</p>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+	                            	<div class="form-group">
+		                            	<label for="remarks">Remarks</label>
+		                            	<textarea rows="6" cols="120" class="form-control" type="text" th:field="*{remarks}" id="remarks" placeholder="Optional remarks" />
+		                            	<div class="alert alert-danger" th:if="${#fields.hasErrors('remarks')}" th:errors="*{remarks}"></div>
+		                        	</div>
+		                    	</div>
+                        	</div>    
+                         
+                                            
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-success">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <div layout:fragment="page_specific_scripts">
+            
+            <script th:inline="javascript">
+                $(document).ready(()=>{
+			      $('#partnerLogo').change(function(){
+			        const file = this.files[0];
+			        console.log(file);
+			        if (file){
+			          let reader = new FileReader();
+			          reader.onload = function(event){
+			            console.log(event.target.result);
+			            $('#thumbnail').attr('src', event.target.result);
+			          }
+			          reader.readAsDataURL(file);
+			        }
+			      });
+			    });
+            </script>
+            
+            
+            <script type="text/javascript">
+			    $(document).ready(() => {
+			    
+			    $('#partnername').prop('readonly', true);
+			    $('#partnername').css({'font-size': '20px', 'font-weight':'bold', 'color': 'blue'});
+			    
+			        // Function to update the partner name based on first name and last name
+			        function updatePartnerName() {
+			            const firstName = $('#firstName').val().trim();
+			            const lastName = $('#lastName').val().trim();
+			            const partnername = firstName + '_' + lastName;
+			            $('#partnername').val(partnername);
+			        }
+			
+			        // Call the function on page load
+			        updatePartnerName();
+			
+			        // Call the function whenever the first name or last name field changes
+			        $('#lastName').on('input', updatePartnerName);
+			
+			        // Function to validate the form before submission
+			        function validateForm() {
+			            const firstName = $('#firstName').val().trim();
+			            const lastName = $('#lastName').val().trim();
+			
+			            // Check if first name and last name are not empty
+			            if (firstName === '' || lastName === '') {
+			                alert('Please enter both first name and last name.');
+			                return false;
+			            }
+			
+			            // Check if the partner name is not empty
+			            if ($('#partnername').val().trim() === '') {
+			                alert('Please update the partner name.');
+			                return false;
+			            }
+			
+			            // Add any additional validation logic here
+			
+			            // Form is valid, allow submission
+			            return true;
+			        }
+			
+			        // Attach form submission event
+			        $('#partnerForm').on('submit', validateForm);
+			    });
+			</script>
+			      
+        </div>
+        
+    </body>
+</html>

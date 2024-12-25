@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" 
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layouts/main_layout}">
+    <head>
+        <title>B 2 C Payment</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    </head>
+    <body>
+        <div layout:fragment="breadcrumb">
+            <div class="col-sm-6">
+                <h1>B2C Payment</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a th:href="@{/payments/mobile-money/index}" >Mpesa Payments</a></li>
+                    <li class="breadcrumb-item active">New Payment</li>
+                </ol>
+            </div>
+        </div>
+        <div  layout:fragment="content">
+            <div class="card card-info">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-plus"></i>
+                        New B-2-C
+                    </h3>
+                </div>
+                
+                 <div class="card-body"> 
+                 	<div class="row"> 
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="balanceBf_Id">Balance B/F</label>
+                                    <input class="input form-control text-center" type="hidden" id="balanceBf_Id" placeholder="user balance b/f" />                                    
+                                    <input class="input form-control text-center" type="text" id="balanceBf_Id_1" placeholder="user balance b/f" />
+                                </div>
+                            </div> 
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="balanceCf_Id">Balance C/F</label>
+                                    <input class="input form-control text-center" type="text" id="balanceCf_Id" placeholder="user balance c/f" />                                    
+                                </div>
+                            </div>  
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="paymentDate">Payment Date</label>
+                                    <input class="form-control" type="date" id="paymentDate" placeholder="choose payment date" />                                    
+                                </div>
+                            </div> 
+                      </div>
+                  </div>
+                            
+                            
+                <form th:action="@{/mobile-money/b2c-transaction}" th:object="${internalB2CRequestDTO}" method="POST" enctype="multipart/form-data">
+                    <div class="card-body">  
+		                    <div class="col-sm-12 text-center bg-dark">
+				                <h1>B2C Transaction</h1>
+				            </div>
+                        <div class="row">
+                            
+		                     <!--div class="col-md-3">
+	                            <div class="form-group">
+		                            <label class="mx-0" style="font-weight:bold;">Customer Unit</label>
+								<select id="user_Id" name="userId" th:field="*{users}" class="form-control col-xs-12 mb-3"  required="true" />
+									<option th:value="''" >Select User</option>
+									<option th:each="user : ${listUsers}" th:value="${user.id}" th:text="${user.username}" th:selected="${user.id} == *{users}"></option>	 
+								</select>												
+		                            <div class="alert alert-danger" th:if="${#fields.hasErrors('users')}" th:errors="*{users}"></div>
+		                        </div>
+		                    </div-->
+		                 
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="paidBy">Party B</label>
+                                    <input class="form-control" type="text" th:field="*{partyB}" id="partyB" placeholder="enter party B" />
+                                    <div class="alert alert-danger" th:if="${#fields.hasErrors('partyB')}" th:errors="*{partyB}"></div>
+                                </div>
+                            </div>
+                         
+                         	<div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="amount">Amount</label>
+                                    <input class="input form-control text-center" type="text" th:field="*{amount}" id="amount" placeholder="0" />
+                                    <div class="alert alert-danger" th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}"></div>
+                                </div>
+                            </div>
+                            
+                             <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="commandID">CommandID</label>
+                                    <input class="form-control" type="text" th:field="*{commandID}" id="commandID" placeholder="enter command ID" />
+                                    <div class="alert alert-danger" th:if="${#fields.hasErrors('commandID')}" th:errors="*{commandID}"></div>
+                                </div>
+                            </div>
+                            
+                             <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="occassion">Occassion</label>
+                                    <input class="form-control" type="text" th:field="*{occassion}" id="occassion" placeholder="enter occassion" />
+                                    <div class="alert alert-danger" th:if="${#fields.hasErrors('occassion')}" th:errors="*{occassion}"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-12">
+	                            	<div class="form-group">
+		                            	<label for="remarks">Remarks</label>
+		                            	<textarea rows="3" cols="120" class="form-control" type="text" th:field="*{remarks}" id="remarks" placeholder="Enter Remarks" />
+		                            	<div class="alert alert-danger" th:if="${#fields.hasErrors('remarks')}" th:errors="*{remarks}"></div>
+		                        	</div>
+	                    	</div>	 
+                            
+                        </div>                    
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-success">Save</button>
+                        <button type="reset" class="btn btn-warning  mx-5" id="btnReset" style="align:center;">cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <div layout:fragment="page_specific_scripts">
+            
+            <script th:inline="javascript">
+			    $(document).ready(function() {
+			        $('#paymentDate').val(new Date().toISOString().split('T')[0]);
+			    });
+			</script>
+                								
+			<!--script type="text/javascript" th:replace="../static/payment_Info.js" th:src="@{/payment_Info.js}"></script-->
+							        	
+        </div>
+        
+    </body>
+</html>

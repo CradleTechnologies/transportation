@@ -25,7 +25,7 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 //@Data
 @Entity
 @Table(name="users", catalog="cradle_transport", schema="", uniqueConstraints = {
-		@UniqueConstraint(columnNames = {"user_name"})})
+		@UniqueConstraint(columnNames = {"user_name", "email"})})
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Users.findAll", query = "SELECT u FROM Users u"),
@@ -80,7 +80,7 @@ public class Users implements Serializable {
 
     @JoinColumn(name = "audit_identifier_id", referencedColumnName = "identifier_id", nullable = false)
     @ManyToOne(optional = false)
-    private AuditIdentifier auditIdentifierId;
+    private AuditIdentifier auditIdentifier;
     
     
     //Constructors  
@@ -224,22 +224,14 @@ public class Users implements Serializable {
 	}
 
 
-	public AuditIdentifier getAuditIdentifierId() {
-		return auditIdentifierId;
+	public AuditIdentifier getAuditIdentifier() {
+		return auditIdentifier;
 	}
 
 
-	public void setAuditIdentifierId(AuditIdentifier auditIdentifierId) {
-		this.auditIdentifierId = auditIdentifierId;
+	public void setAuditIdentifier(AuditIdentifier auditIdentifier) {
+		this.auditIdentifier = auditIdentifier;
 	}
-
-//
-//	@Override
-//	public String toString() {
-//		return "Users [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", username=" + username
-//				+ ", email=" + email + ", status=" + status + ", password=" + password + ", roles=" + roles
-//				+ ", remarks=" + remarks + ", auditIdentifierId=" + auditIdentifierId + "]";
-//	}
 
 
 	@Transient

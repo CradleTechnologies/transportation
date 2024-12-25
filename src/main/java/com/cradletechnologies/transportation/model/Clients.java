@@ -28,6 +28,7 @@ import jakarta.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Clients.findByFirstName", query = "SELECT c FROM Clients c WHERE c.firstName = :firstName"),
 	@NamedQuery(name = "Clients.findByLastName", query = "SELECT c FROM Clients c WHERE c.lastName = :lastName"),
 	@NamedQuery(name = "Clients.findByTelNo", query = "SELECT c FROM Clients c WHERE c.telNo = :telNo"),
+	@NamedQuery(name = "Clients.findByStatus", query = "SELECT c FROM Clients c WHERE c.status = :status"),
 	@NamedQuery(name = "Clients.findByEmailAddress", query = "SELECT c FROM Clients c WHERE c.emailAddress = :emailAddress"),
 	})
 public class Clients implements Serializable {
@@ -70,6 +71,12 @@ public class Clients implements Serializable {
 	    @Size(min = 1, max = 100)
 	    @Column(name = "tel_no", nullable = false, length = 100)
 	    private String telNo;
+	    
+	    @Basic(optional = false)
+	    @NotNull
+	    @Size(min = 1, max = 100)
+	    @Column(name = "status", nullable = false, length = 100)
+	    private String status;
 
 	    @JoinColumn(name = "area_id", referencedColumnName = "id", nullable = false)
 	    @ManyToOne(optional = false)
@@ -92,7 +99,8 @@ public class Clients implements Serializable {
 		public Clients(int id, @NotNull @Size(min = 1, max = 255) String firstName,
 				@NotNull @Size(min = 1, max = 255) String lastName,
 				@NotNull @Size(min = 1, max = 255) String clientName, @Size(min = 1, max = 400) String emailAddress,
-				@NotNull @Size(min = 1, max = 100) String telNo, Areas areas) {
+				@NotNull @Size(min = 1, max = 100) String telNo, @NotNull @Size(min = 1, max = 100) String status,
+				Areas areas) {
 			super();
 			this.id = id;
 			this.firstName = firstName;
@@ -100,19 +108,22 @@ public class Clients implements Serializable {
 			this.clientName = clientName;
 			this.emailAddress = emailAddress;
 			this.telNo = telNo;
+			this.status = status;
 			this.areas = areas;
 		}
 
 		public Clients(@NotNull @Size(min = 1, max = 255) String firstName,
 				@NotNull @Size(min = 1, max = 255) String lastName,
 				@NotNull @Size(min = 1, max = 255) String clientName, @Size(min = 1, max = 400) String emailAddress,
-				@NotNull @Size(min = 1, max = 100) String telNo, Areas areas) {
+				@NotNull @Size(min = 1, max = 100) String telNo, @NotNull @Size(min = 1, max = 100) String status,
+				Areas areas) {
 			super();
 			this.firstName = firstName;
 			this.lastName = lastName;
 			this.clientName = clientName;
 			this.emailAddress = emailAddress;
 			this.telNo = telNo;
+			this.status = status;
 			this.areas = areas;
 		}
 
@@ -162,6 +173,14 @@ public class Clients implements Serializable {
 
 		public void setTelNo(String telNo) {
 			this.telNo = telNo;
+		}
+
+		public String getStatus() {
+			return status;
+		}
+
+		public void setStatus(String status) {
+			this.status = status;
 		}
 
 		public Areas getAreas() {

@@ -33,7 +33,7 @@ public class PaymentBilling implements Serializable{
 	private Date recordDate;
 	
 	@Column(name = "client_id", nullable = false, length = 200)
-	private String clientId;
+	private int clientId;
 	
 	@Column(name = "payment_id", nullable = false, length = 200)
 	private int paymentId;
@@ -51,7 +51,7 @@ public class PaymentBilling implements Serializable{
 	}
 
 
-	public PaymentBilling(int id, Date recordDate, String clientId, int paymentId, int transportationId, double amount) {
+	public PaymentBilling(int id, Date recordDate, int clientId, int paymentId, int transportationId, double amount) {
 		super();
 		this.id = id;
 		this.recordDate = recordDate;
@@ -62,7 +62,7 @@ public class PaymentBilling implements Serializable{
 	}
 
 
-	public PaymentBilling(Date recordDate, String clientId, int paymentId, int transportationId, double amount) {
+	public PaymentBilling(Date recordDate, int clientId, int paymentId, int transportationId, double amount) {
 		super();
 		this.recordDate = recordDate;
 		this.clientId = clientId;
@@ -92,12 +92,12 @@ public class PaymentBilling implements Serializable{
 	}
 
 
-	public String getClientId() {
+	public int getClientId() {
 		return clientId;
 	}
 
 
-	public void setClientId(String clientId) {
+	public void setClientId(int clientId) {
 		this.clientId = clientId;
 	}
 

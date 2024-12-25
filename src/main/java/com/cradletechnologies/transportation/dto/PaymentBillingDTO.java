@@ -8,7 +8,7 @@ public class PaymentBillingDTO {
 	
 	private Date recordDate;
 	
-	private String clientId;
+	private int clientId;
 	
 	private int paymentId;
 	
@@ -22,7 +22,7 @@ public class PaymentBillingDTO {
 	}
 
 
-	public PaymentBillingDTO(int id, Date recordDate, String clientId, int paymentId, int transportationId, double amount) {
+	public PaymentBillingDTO(int id, Date recordDate, int clientId, int paymentId, int transportationId, double amount) {
 		super();
 		this.id = id;
 		this.recordDate = recordDate;
@@ -33,7 +33,7 @@ public class PaymentBillingDTO {
 	}
 
 
-	public PaymentBillingDTO(Date recordDate, String clientId, int paymentId, int transportationId, double amount) {
+	public PaymentBillingDTO(Date recordDate, int clientId, int paymentId, int transportationId, double amount) {
 		super();
 		this.recordDate = recordDate;
 		this.clientId = clientId;
@@ -63,12 +63,12 @@ public class PaymentBillingDTO {
 	}
 
 
-	public String getClientId() {
+	public int getClientId() {
 		return clientId;
 	}
 
 
-	public void setClientId(String clientId) {
+	public void setClientId(int clientId) {
 		this.clientId = clientId;
 	}
 

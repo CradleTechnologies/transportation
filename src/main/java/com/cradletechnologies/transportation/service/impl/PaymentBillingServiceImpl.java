@@ -46,25 +46,11 @@ public class PaymentBillingServiceImpl implements PaymentBillingService{
 		
 	}
 	
-	@Transactional
-	@Override
-	public void fillSaleToPaymentBilling() {
-		paymentBillingRepository.fillPaymentBilling_Sale();
-		
-	}
-
 
 	@Override
 	public List<ClientsList_Report> getClientsListReport() {
 		return paymentBillingRepository.getClientsListReport();
 	}
-
-	
-//	@Override
-//	public ProductSales findClient(int id) {
-//		return paymentBillingRepository.getClientBillingInfo(id);
-//	}
-
 
 
 	@Override
@@ -72,23 +58,23 @@ public class PaymentBillingServiceImpl implements PaymentBillingService{
 		return paymentBillingRepository.getClientsCount();
 	}
 
-	@Override
-	public Double totalRevenue() {
-		return paymentBillingRepository.getTotalRevenue();
-	}
-	
-	@Override
-	public Double totalInvoices() {
-		return paymentBillingRepository.getTotalInvoices();
-	}
-	
-	@Override
-	public Double bookBalance() {
-		Double receipts = paymentBillingRepository.getTotalRevenue();
-		Double invoices = paymentBillingRepository.getTotalInvoices();
-		Double balance = receipts - invoices; 
-		return balance;
-	}
+//	@Override
+//	public Double totalRevenue() {
+//		return paymentBillingRepository.getTotalRevenue();
+//	}
+//	
+//	@Override
+//	public Double totalInvoices() {
+//		return paymentBillingRepository.getTotalInvoices();
+//	}
+//	
+//	@Override
+//	public Double bookBalance() {
+//		Double receipts = paymentBillingRepository.getTotalRevenue();
+//		Double invoices = paymentBillingRepository.getTotalInvoices();
+//		Double balance = receipts - invoices; 
+//		return balance;
+//	}
 
 	@Override
 	public ClientsList_Report getClientReport(int clientId) {

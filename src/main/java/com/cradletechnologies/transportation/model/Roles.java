@@ -18,7 +18,7 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 //@Getter
 //@Setter
 @Entity
-@Table(name = "role", catalog = "cradle_transport", schema = "", uniqueConstraints = {
+@Table(name = "roles", catalog = "cradle_transport", schema = "", uniqueConstraints = {
 		@UniqueConstraint(columnNames = {"name"})})
 @XmlRootElement
 @NamedQueries({
@@ -95,11 +95,6 @@ public class Roles implements Serializable {
 	public void setAuditIdentifierId(AuditIdentifier auditIdentifierId) {
 		this.auditIdentifierId = auditIdentifierId;
 	}
-
-
-
-	
-	
     
     //to string
 	@Override
@@ -108,10 +103,5 @@ public class Roles implements Serializable {
 	}
 
 
-
-	//	Uniderictional Many To Many relationship for the user and role entities.
-//	@ManyToMany(mappedBy = "roles")
-//    private Set<Users> user;
-	
 	
 }

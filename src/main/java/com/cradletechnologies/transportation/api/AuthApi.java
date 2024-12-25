@@ -142,7 +142,7 @@ public class AuthApi {
         user.setStatus(userDTO.getStatus());
         user.setRemarks(userDTO.getRemarks());
         user.setRoles(Collections.singleton(role));
-        user.setAuditIdentifierId(auditIdentifier);            
+        user.setAuditIdentifier(auditIdentifier);            
 
         // Save user
         try {

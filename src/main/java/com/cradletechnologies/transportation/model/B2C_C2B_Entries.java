@@ -14,7 +14,7 @@ import jakarta.persistence.UniqueConstraint;
 import lombok.Data;
 
 @Entity
-@Table(name = "b2c_entries", catalog = "reseller_mis", schema = "", uniqueConstraints = {
+@Table(name = "b2c_entries", catalog = "cradle_transport", schema = "", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"transactionId"}),
     @UniqueConstraint(columnNames = {"conversationId"}),
     @UniqueConstraint(columnNames = {"originatorConversationId"})

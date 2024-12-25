@@ -20,12 +20,11 @@ import jakarta.validation.constraints.Size;
 import jakarta.xml.bind.annotation.XmlRootElement;
 
 @Entity
-@Table(name = "transportations", catalog = "cradle_transport", schema = "", uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"transportation_code"})})
+@Table(name = "transportations", catalog = "cradle_transport", schema = "")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Transportations.findAll", query = "SELECT a FROM Transportations a"),
-    @NamedQuery(name = "Transportations.findById", query = "SELECT a FROM Transportations a WHERE a.id = :id")})
+    @NamedQuery(name = "Transportations.findAll", query = "SELECT t FROM Transportations t"),
+    @NamedQuery(name = "Transportations.findById", query = "SELECT t FROM Transportations t WHERE t.id = :id")})
 public class Transportations implements Serializable {
 
 	 private static final long serialVersionUID = 1L;

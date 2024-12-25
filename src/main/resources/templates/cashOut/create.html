@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" 
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layouts/main_layout}">
+    <head>
+        <title>New CashOut</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    </head>
+    <body>
+        <div layout:fragment="breadcrumb">
+            <div class="col-sm-6">
+                <h1>CashOut</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a th:href="@{/cashOut/index}" >CashOut</a></li>
+                    <li class="breadcrumb-item active">Add CashOut</li>
+                </ol>
+            </div>
+        </div>
+        <div layout:fragment="content">
+            <div class="card card-info">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-plus"></i>
+                        New CashOut
+                    </h3>
+                </div>
+                <form th:action="@{/cashOut/create}" th:object="${cashOutdto}" method="POST">
+                    <div class="card-body">  
+	                    <div class="row"> 
+		                    <div class="col-md-3">
+	                            <div class="form-group">
+	                                <label for="recordDate">Date</label>
+	                                <input class="form-control text-center" type="date" th:field="*{recordDate}" id="recordDate" placeholder="choose billing date" />
+	                                <div class="alert alert-danger" th:if="${#fields.hasErrors('recordDate')}" th:errors="*{recordDate}"></div>
+	                            </div>
+	                        </div>
+		                    <div class="col-md-3">
+	                            <div class="form-group">
+		                            <label class="mx-0" style="font-weight:bold;">Terms</label>
+								<select id="term_Id" name="termId" th:field="*{terms}" class="form-control col-xs-12 mb-3"  required="true" />
+									<option th:value="''" >Select Terms</option>
+									<option th:each="term : ${listTerms}" th:value="${term.id}" th:text="${term.name}" th:selected="${term.id} == *{terms}"></option>	 
+								</select>												
+		                            <div class="alert alert-danger" th:if="${#fields.hasErrors('terms')}" th:errors="*{terms}"></div>
+		                        </div>
+		                    </div>	
+	                         <div class="col-md-3">
+	                            <div class="form-group">
+		                            <label class="mx-0" style="font-weight:bold;">Categories</label>
+								<select id="category_Id" name="categoryId" th:field="*{categories}" class="form-control col-xs-12 mb-3"  required="true" />
+									<option th:value="''" >Select Category</option>
+									<option th:each="category : ${listCategories}" th:value="${category.id}" th:text="${category.name}" th:selected="${category.id} == *{categories}"></option>	 
+								</select>												
+		                            <div class="alert alert-danger" th:if="${#fields.hasErrors('categories')}" th:errors="*{categories}"></div>
+		                        </div>
+		                    </div>	
+	                        <div class="col-md-3">
+		                        <div class="form-group">
+		                            <label for="amount">Cash In Amount</label>
+		                            <input class="form-control text-center" type="text" th:field="*{amount}" id="amount" placeholder="0" />
+		                            <div class="alert alert-danger" th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}"></div>
+	                            </div>
+	                        </div>
+	                       
+                            <div class="col-md-12">
+                                <div class="form-group">
+		                            <label for="remarks">Remarks</label>
+		                            <textarea rows="3" cols="120" class="form-control" type="text" th:field="*{remarks}" id="remarks" placeholder="Optional Remarks" />
+		                            <div class="alert alert-danger" th:if="${#fields.hasErrors('remarks')}" th:errors="*{remarks}"></div>
+		                        </div>
+                            </div>
+	                         
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </form> 
+            </div>
+        </div>
+    </body>
+</html>

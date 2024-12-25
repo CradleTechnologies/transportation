@@ -17,6 +17,8 @@ public class ClientsDTO implements Serializable {
 	    private String emailAddress;
 
 	    private String telNo;
+	    
+	    private String status;
 
 	    private Areas areas;
 
@@ -29,7 +31,7 @@ public class ClientsDTO implements Serializable {
 			this.id = id;
 		}
     	
-	    public ClientsDTO(int id, String firstName, String lastName, String clientName, String emailAddress, String telNo, Areas areas) {
+	    public ClientsDTO(int id, String firstName, String lastName, String clientName, String emailAddress, String telNo, String status, Areas areas) {
 			super();
 			this.id = id;
 			this.firstName = firstName;
@@ -37,16 +39,18 @@ public class ClientsDTO implements Serializable {
 			this.clientName = clientName;
 			this.emailAddress = emailAddress;
 			this.telNo = telNo;
+			this.status= status;
 			this.areas = areas;
 		}
 
-		public ClientsDTO(String firstName, String lastName, String clientName, String emailAddress, String telNo, Areas areas) {
+		public ClientsDTO(String firstName, String lastName, String clientName, String emailAddress, String telNo, String status, Areas areas) {
 			super();
 			this.firstName = firstName;
 			this.lastName = lastName;
 			this.clientName = clientName;
 			this.emailAddress = emailAddress;
 			this.telNo = telNo;
+			this.status= status;
 			this.areas = areas;
 		}
 
@@ -96,6 +100,14 @@ public class ClientsDTO implements Serializable {
 
 		public void setTelNo(String telNo) {
 			this.telNo = telNo;
+		}
+
+		public String getStatus() {
+			return status;
+		}
+
+		public void setStatus(String status) {
+			this.status = status;
 		}
 
 		public Areas getAreas() {

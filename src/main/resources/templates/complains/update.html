@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" 
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layouts/main_layout}">
+    <head>
+        <title>Update Complain</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    </head>
+    <body>
+        <div layout:fragment="breadcrumb">
+            <div class="col-sm-6">
+                <h1>Complains</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a th:href="@{/complains/index}" >Complains</a></li>
+                    <li class="breadcrumb-item active">Update Complain</li>
+                </ol>
+            </div>
+        </div>
+        <div layout:fragment="content">
+            <div class="card card-info">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-edit"></i>
+                        Update Complain
+                    </h3>
+                </div>
+                <form th:action="@{/complains/update/{id}(id=${complaindto.id})}" th:object="${complaindto}" method="POST" form="complainsform">
+                    <input type="hidden" th:field="*{id}" />
+                    <div class="card-body">  
+                        <div class="row"> 
+	                        <div class="col-md-4">
+	                            <div class="form-group">
+	                                <label for="recordDate">Date</label>
+	                                <input class="form-control" type="date" th:field="*{recordDate}" id="recordDate" placeholder="choose billing date" />
+	                                <div class="alert alert-danger" th:if="${#fields.hasErrors('recordDate')}" th:errors="*{recordDate}"></div>
+	                            </div>
+	                        </div>
+	                        <div class="col-md-4">
+		                        <div class="form-group">
+		                            <label for="initials">Complainant</label>
+		                            <input class="form-control" type="text" th:field="*{complainant}" id="complainant" placeholder="Enter Complainant Name" />
+		                            <div class="alert alert-danger" th:if="${#fields.hasErrors('complainant')}" th:errors="*{complainant}"></div>
+	                            </div>
+	                        </div>
+	                        <div class="col-md-4">
+		                        <div class="form-group">
+		                            <label for="telNo">Tel Number</label>
+		                            <input class="form-control" type="text" th:field="*{telNo}" id="telNo" placeholder="Enter Telephone Number" />
+		                            <div class="alert alert-danger" th:if="${#fields.hasErrors('telNo')}" th:errors="*{telNo}"></div>
+	                            </div>
+	                        </div>
+	                        <div class="col-md-6">
+		                        <div class="form-group">
+		                            <label for="addressee">Addressee</label>
+		                            <input class="form-control" type="text" th:field="*{addressee}" id="addressee" placeholder="Enter Addressee" />
+		                            <div class="alert alert-danger" th:if="${#fields.hasErrors('addressee')}" th:errors="*{addressee}"></div>
+	                            </div>
+	                        </div>	 
+	                                               
+	                        <div class="col-sm-6"> 
+		                        <div class="form-group">		                            
+		                            <label class="mx-0" style="font-weight:bold;">Status</label> 
+									<select id="status" name="status" th:field="*{status}" class="form-control col-xs-12 mb-2"  required="true" />
+										<option th:value="''" >Select Status</option>
+										<option th:value="PENDING" th:text="PENDING" th:selected="PENDING == *{status}"></option>
+					        			<option th:value="SOLVED" th:text="SOLVED" th:selected="SOLVED == *{status}"></option>
+					        			<option th:value="IN_PROGRESS" th:text="IN_PROGRESS" th:selected="IN_PROGRESS == *{status}"></option>
+					        			<option th:value="NON_ISSUE" th:text="'NON_ISSUE'" th:selected="'NON_ISSUE' == *{status}"></option>
+									</select>		                            
+		                            <div class="alert alert-danger" th:if="${#fields.hasErrors('status')}" th:errors="*{status}"></div>
+		                        </div>
+		                     </div>
+	                        
+                            <div class="col-md-12">
+                                <div class="form-group">
+		                            <label for="details">Details</label>
+		                            <textarea rows="3" cols="120" class="form-control" type="text" th:field="*{details}" id="details" placeholder="Optional Details" />
+		                            <div class="alert alert-danger" th:if="${#fields.hasErrors('details')}" th:errors="*{details}"></div>
+		                        </div>
+                            </div>
+	                                         
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </form> 
+            </div>
+        </div>
+    </body>
+</html>

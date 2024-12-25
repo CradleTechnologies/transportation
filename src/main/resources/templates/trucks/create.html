@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" 
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layouts/main_layout}">
+    <head>
+        <title>New Truck</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    </head>
+    <body>
+        <div layout:fragment="breadcrumb">
+            <div class="col-sm-6">
+                <h1>Trucks List</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a th:href="@{/trucks/index}" >Truck List</a></li>
+                    <li class="breadcrumb-item active">Add Truck</li>
+                </ol>
+            </div>
+        </div>
+        <div layout:fragment="content">
+            <div class="card card-info">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-plus"></i>
+                        New Truck
+                    </h3>
+                </div>
+                <form th:action="@{/trucks/create}" th:object="${trucksdto}" method="POST">
+                    <div class="card-body">  
+		                <div class="row">
+		                	<div class="col-sm-3">    	
+		                        <div class="form-group">
+		                            <label for="registrationNo">Registration Number</label>
+		                            <input class="form-control" type="text" th:field="*{registrationNo}" id="registrationNo" placeholder="Enter Truck Registration" />
+		                            <div class="alert alert-danger" th:if="${#fields.hasErrors('registrationNo')}" th:errors="*{registrationNo}"></div>
+		                        </div>
+		                     </div>
+		                	<div class="col-sm-3"> 
+		                        <div class="form-group">
+		                            <label for="capacity">Capacity</label>
+		                            <input class="form-control" type="text" th:field="*{capacity}" id="capacity" placeholder="Enter Trucks Capacity" />
+		                            <div class="alert alert-danger" th:if="${#fields.hasErrors('capacity')}" th:errors="*{capacity}"></div>
+		                        </div>
+		                     </div>
+		                	<div class="col-sm-3"> 
+		                        <div class="form-group col">
+		                            <label for="driversId">Drivers ID</label>
+		                            <input class="form-control" type="text" th:field="*{driversId}" id="driversId" placeholder="Enter Driver's ID" />
+		                            <div class="alert alert-danger" th:if="${#fields.hasErrors('driversId')}" th:errors="*{driversId}"></div>
+		                        </div>
+		                     </div>
+		                	<div class="col-sm-3"> 
+		                        <div class="form-group col">
+		                            <label for="driversName">Drivers Name</label>
+		                            <input class="form-control" type="text" th:field="*{driversName}" id="driversName" placeholder="Enter Driver's Name" />
+		                            <div class="alert alert-danger" th:if="${#fields.hasErrors('driversName')}" th:errors="*{driversName}"></div>
+		                        </div>
+		                     </div>
+		                	
+	                	</div>
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </form> 
+            </div>
+        </div>
+    </body>
+</html>
