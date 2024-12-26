@@ -140,13 +140,13 @@ public class CashIn implements Serializable {
 
 
 
-		public Clients getClients() {
+		public Clients getClient() {
 			return client;
 		}
 
 
 
-		public void setClients(Clients client) {
+		public void setClient(Clients client) {
 			this.client = client;
 		}
 

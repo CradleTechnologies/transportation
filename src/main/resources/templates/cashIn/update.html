@@ -42,22 +42,22 @@
 	                        </div>
 		                    <div class="col-md-3">
 	                            <div class="form-group">
-		                            <label class="mx-0" style="font-weight:bold;">Terms</label>
-								<select id="pupil_Id" name="termId" th:field="*{terms}" class="form-control col-xs-12 mb-3"  required="true" />
-									<option th:value="''" >Select Terms</option>
-									<option th:each="term : ${listTerms}" th:value="${term.id}" th:text="${term.name}" th:selected="${term.id} == *{terms.id}"></option>	 
+		                            <label class="mx-0" style="font-weight:bold;">Clients</label>
+								<select id="client_Id" name="clientId" th:field="*{client}" class="form-control col-xs-12 mb-3"  required="true" />
+									<option th:value="''" >Select Clients</option>
+									<option th:each="clients : ${listClients}" th:value="${clients.id}" th:text="${clients.clientName}" th:selected="${clients.id} == *{client.id}"></option>	 
 								</select>												
-		                            <div class="alert alert-danger" th:if="${#fields.hasErrors('terms')}" th:errors="*{terms}"></div>
+		                            <div class="alert alert-danger" th:if="${#fields.hasErrors('client')}" th:errors="*{client}"></div>
 		                        </div>
 		                    </div>	
 	                         <div class="col-md-3">
 	                            <div class="form-group">
-		                            <label class="mx-0" style="font-weight:bold;">Categories</label>
-								<select id="category_Id" name="categoryId" th:field="*{categories}" class="form-control col-xs-12 mb-3"  required="true" />
-									<option th:value="''" >Select Category</option>
-									<option th:each="category : ${listCategories}" th:value="${category.id}" th:text="${category.name}" th:selected="${category.id} == *{categories.id}"></option>	 
+		                            <label class="mx-0" style="font-weight:bold;">Designations</label>
+								<select id="designation_Id" name="designationId" th:field="*{designation}" class="form-control col-xs-12 mb-3"  required="true" />
+									<option th:value="''" >Select Designation</option>
+									<option th:each="designations : ${listDesignations}" th:value="${designations.id}" th:text="${designations.name}" th:selected="${designations.id} == *{designation.id}"></option>	 
 								</select>												
-		                            <div class="alert alert-danger" th:if="${#fields.hasErrors('categories')}" th:errors="*{categories}"></div>
+		                            <div class="alert alert-danger" th:if="${#fields.hasErrors('designation')}" th:errors="*{designation}"></div>
 		                        </div>
 		                    </div>	
 	                        <div class="col-md-3">

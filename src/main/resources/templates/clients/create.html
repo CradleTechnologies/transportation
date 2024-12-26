@@ -4,20 +4,20 @@
       xmlns:th="http://www.thymeleaf.org"
       layout:decorate="~{layouts/main_layout}">
     <head>
-        <title>New Partner</title>
+        <title>New Client</title>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     </head>
     <body>
         <div layout:fragment="breadcrumb">
             <div class="col-sm-6">
-                <h1>Partners</h1>
+                <h1>Clients</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item"><a th:href="@{/partners/index}" >Partners</a></li>
-                    <li class="breadcrumb-item active">New Partner</li>
+                    <li class="breadcrumb-item"><a th:href="@{/clients/index}" >Clients</a></li>
+                    <li class="breadcrumb-item active">New Client</li>
                 </ol>
             </div>
         </div>
@@ -26,10 +26,10 @@
                 <div class="card-header">
                     <h3 class="card-title">
                         <i class="fas fa-plus"></i>
-                        New Partner
+                        New Client
                     </h3>
                 </div>
-                <form th:action="@{/partners/create}" th:object="${partnersDTO}" method="POST" enctype="multipart/form-data">
+                <form th:action="@{/clients/create}" th:object="${clientsDTO}" method="POST" enctype="multipart/form-data">
                     <div class="card-body">  
                         <div class="row"> 
                             <div class="col-md-4">
@@ -49,17 +49,25 @@
                          
                          	<div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="partnername">Partner Name</label>
-                                    <input class="form-control" type="text" th:field="*{partnername}" id="partnername" placeholder="enter partner name" />
-                                    <div class="alert alert-danger" th:if="${#fields.hasErrors('partnername')}" th:errors="*{partnername}"></div>
+                                    <label for="clientName">Client Name</label>
+                                    <input class="form-control" type="text" th:field="*{clientName}" id="clientName" placeholder="enter client name" />
+                                    <div class="alert alert-danger" th:if="${#fields.hasErrors('clientName')}" th:errors="*{clientName}"></div>
                                 </div>
                             </div>
                             
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="email">Email Address</label>
-                                    <input class="form-control" type="text" th:field="*{email}" id="email" placeholder="enter email" />
-                                    <div class="alert alert-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+                                    <label for="emailAddress">Email Address</label>
+                                    <input class="form-control" type="text" th:field="*{emailAddress}" id="emailAddress" placeholder="enter email" />
+                                    <div class="alert alert-danger" th:if="${#fields.hasErrors('emailAddress')}" th:errors="*{emailAddress}"></div>
+                                </div>
+                            </div>
+                                                        
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="telNo">Telephone No.</label>
+                                    <input class="form-control" type="text" th:field="*{telNo}" id="telNo" placeholder="enter telephone no." />
+                                    <div class="alert alert-danger" th:if="${#fields.hasErrors('telNo')}" th:errors="*{telNo}"></div>
                                 </div>
                             </div>
                             
@@ -77,32 +85,16 @@
 		                                                 
 		                     <div class="col-md-3">
 	                            <div class="form-group">
-		                            <label class="mx-0" style="font-weight:bold;">Partnership</label> 
-									<select id="partnership_Id" name="partnershipId" th:field="*{partnerships}" class="form-control col-xs-12 mb-3"  required="true" />
-										<option th:value="''" >Select Partnership</option>
-										<option th:each="partnership : ${listPartnerships}" th:value="${partnership.id}" th:text="${partnership.name}" th:selected="${partnership.id} == *{partnerships}"></option>	 
+		                            <label class="mx-0" style="font-weight:bold;">Area</label> 
+									<select id="area_Id" name="areaId" th:field="*{area}" class="form-control col-xs-12 mb-3"  required="true" />
+										<option th:value="''" >Select Area</option>
+										<option th:each="areas : ${listAreas}" th:value="${areas.id}" th:text="${areas.areaName}" th:selected="${areas.id} == *{area}"></option>	 
 									</select>	
-		                            <div class="alert alert-danger" th:if="${#fields.hasErrors('partnerships')}" th:errors="*{partnerships}"></div>
+		                            <div class="alert alert-danger" th:if="${#fields.hasErrors('area')}" th:errors="*{area}"></div>
 		                        </div>
 		                    </div>
 		                    
-                            <div class="col-md-3">                            
-                                <div class="form-group">
-                                    <label for="partnerLogo">Partner Logo</label>
-                                    <input class="form-control" type="file" th:field="*{partnerLogo}" id="partnerLogo" placeholder="enter partner's picture"  accept="image/png, image/jpeg" />
-                                    <div class="alert alert-danger" th:if="${#fields.hasErrors('partnerLogo')}" th:errors="*{partnerLogo}"></div>
-                                </div>
-                            </div>
-                         
-                            <div class="col-md-6">                            
-                                <div class="form-group">
-                                    <p class="card" style="height:200px; overflow:scroll;">
-										<img class="text-center my-auto" id="thumbnail" th:src="@{*{getPartnerLogoPath}}" style="width:100%;" alt="partner_logo" />																	      
-									</p>
-                                </div>
-                            </div>
-                            
-                            <div class="col-md-6">
+                            <div class="col-md-12">
 	                            	<div class="form-group">
 		                            	<label for="remarks">Remarks</label>
 		                            	<textarea rows="6" cols="120" class="form-control" type="text" th:field="*{remarks}" id="remarks" placeholder="Optional remarks" />
@@ -121,71 +113,58 @@
         </div>
         
         <div layout:fragment="page_specific_scripts">
-            
-            <script th:inline="javascript">
-                $(document).ready(()=>{
-			      $('#partnerLogo').change(function(){
-			        const file = this.files[0];
-			        console.log(file);
-			        if (file){
-			          let reader = new FileReader();
-			          reader.onload = function(event){
-			            console.log(event.target.result);
-			            $('#thumbnail').attr('src', event.target.result);
-			          }
-			          reader.readAsDataURL(file);
-			        }
-			      });
-			    });
-            </script>
-            
+           
             
             <script type="text/javascript">
-			    $(document).ready(() => {
-			    
-			    $('#partnername').prop('readonly', true);
-			    $('#partnername').css({'font-size': '20px', 'font-weight':'bold', 'color': 'blue'});
-			    
-			        // Function to update the partner name based on first name and last name
-			        function updatePartnerName() {
-			            const firstName = $('#firstName').val().trim();
-			            const lastName = $('#lastName').val().trim();
-			            const partnername = firstName + '_' + lastName;
-			            $('#partnername').val(partnername);
-			        }
-			
-			        // Call the function on page load
-			        updatePartnerName();
-			
-			        // Call the function whenever the first name or last name field changes
-			        $('#lastName').on('input', updatePartnerName);
-			
-			        // Function to validate the form before submission
-			        function validateForm() {
-			            const firstName = $('#firstName').val().trim();
-			            const lastName = $('#lastName').val().trim();
-			
-			            // Check if first name and last name are not empty
-			            if (firstName === '' || lastName === '') {
-			                alert('Please enter both first name and last name.');
-			                return false;
-			            }
-			
-			            // Check if the partner name is not empty
-			            if ($('#partnername').val().trim() === '') {
-			                alert('Please update the partner name.');
-			                return false;
-			            }
-			
-			            // Add any additional validation logic here
-			
-			            // Form is valid, allow submission
-			            return true;
-			        }
-			
-			        // Attach form submission event
-			        $('#partnerForm').on('submit', validateForm);
-			    });
+            $(document).ready(() => {
+                // Make clientName readonly and style it
+                $('#clientName').prop('readonly', true);
+                $('#clientName').css({
+                    'font-size': '20px', 
+                    'font-weight': 'bold', 
+                    'color': 'blue'
+                });
+                
+                // Function to update the client name based on first name and last name
+                function updateClientName() {
+                    const firstName = $('#firstName').val().trim();
+                    const lastName = $('#lastName').val().trim();
+                    const clientName = firstName + '_' + lastName;
+                    $('#clientName').val(clientName);
+                }
+
+                // Call the function on page load
+                updateClientName();
+
+                // Call the function whenever either first name or last name changes
+                $('#firstName').on('input', updateClientName);
+                $('#lastName').on('input', updateClientName);
+
+                // Function to validate the form before submission
+                function validateForm() {
+                    const firstName = $('#firstName').val().trim();
+                    const lastName = $('#lastName').val().trim();
+
+                    // Check if first name and last name are not empty
+                    if (firstName === '' || lastName === '') {
+                        alert('Please enter both first name and last name.');
+                        return false;
+                    }
+
+                    // Check if the client name is not empty
+                    if ($('#clientName').val().trim() === '') {
+                        alert('Please update the client name.');
+                        return false;
+                    }
+
+                    // Form is valid, allow submission
+                    return true;
+                }
+
+                // Attach form submission event
+                $('form').on('submit', validateForm);
+            });
+
 			</script>
 			      
         </div>

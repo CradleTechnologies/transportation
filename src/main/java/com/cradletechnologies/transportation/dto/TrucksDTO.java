@@ -1,6 +1,6 @@
 package com.cradletechnologies.transportation.dto;
 
-import com.cradletechnologies.transportation.model.Areas;
+import com.cradletechnologies.transportation.model.Companies;
 import com.cradletechnologies.transportation.model.AuditIdentifier;
 import com.cradletechnologies.transportation.model.Staffs;
 
@@ -16,29 +16,29 @@ public class TrucksDTO {
 	    
 	    private Staffs staff;
  
-	    private Areas area;
+	    private Companies company;
 	    
 		public TrucksDTO() {
 
 		}
 
-		public TrucksDTO(int id, String registrationNo, Double capacity, String description, Staffs staff, Areas area) {
+		public TrucksDTO(int id, String registrationNo, Double capacity, String description, Staffs staff, Companies company) {
 			super();
 			this.id = id;
 			this.registrationNo = registrationNo;
 			this.capacity = capacity;
 			this.description = description;
 			this.staff = staff;
-			this.area = area;
+			this.company = company;
 		}
 
-		public TrucksDTO(String registrationNo, Double capacity, String description, Staffs staff, Areas area) {
+		public TrucksDTO(String registrationNo, Double capacity, String description, Staffs staff, Companies company) {
 			super();
 			this.registrationNo = registrationNo;
 			this.capacity = capacity;
 			this.description = description;
 			this.staff = staff;
-			this.area = area;
+			this.company = company;
 		}
 
 		public int getId() {
@@ -91,13 +91,13 @@ public class TrucksDTO {
 		}
 
 
-		public Areas getArea() {
-			return area;
+		public Companies getCompany() {
+			return company;
 		}
 
 
-		public void setArea(Areas area) {
-			this.area = area;
+		public void setCompany(Companies company) {
+			this.company = company;
 		}
 
 

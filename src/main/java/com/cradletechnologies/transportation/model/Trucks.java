@@ -56,9 +56,9 @@ public class Trucks implements Serializable {
 	    private Staffs staff;
  
 	    
-	    @JoinColumn(name = "area_id", referencedColumnName = "id", nullable = false)
+	    @JoinColumn(name = "company_id", referencedColumnName = "id", nullable = false)
 	    @ManyToOne(optional = false)
-	    private Areas area;
+	    private Companies company;
 	    
 	    
 	    @JoinColumn(name = "audit_identifier_id", referencedColumnName = "identifier_id", nullable = false)
@@ -72,25 +72,25 @@ public class Trucks implements Serializable {
 
 
 		public Trucks(int id, @NotNull @Size(min = 1, max = 400) String registrationNo, @NotNull Double capacity,
-				@NotNull String description, Staffs staff, Areas area) {
+				@NotNull String description, Staffs staff, Companies company) {
 			super();
 			this.id = id;
 			this.registrationNo = registrationNo;
 			this.capacity = capacity;
 			this.description = description;
 			this.staff = staff;
-			this.area = area;
+			this.company = company;
 		}
 
 
 		public Trucks(@NotNull @Size(min = 1, max = 400) String registrationNo, @NotNull Double capacity,
-				@NotNull String description, Staffs staff, Areas area) {
+				@NotNull String description, Staffs staff, Companies company) {
 			super();
 			this.registrationNo = registrationNo;
 			this.capacity = capacity;
 			this.description = description;
 			this.staff = staff;
-			this.area = area;
+			this.company = company;
 		}
 
 
@@ -144,13 +144,13 @@ public class Trucks implements Serializable {
 		}
 
 
-		public Areas getArea() {
-			return area;
+		public Companies getCompany() {
+			return company;
 		}
 
 
-		public void setArea(Areas area) {
-			this.area = area;
+		public void setCompany(Companies company) {
+			this.company = company;
 		}
 
 

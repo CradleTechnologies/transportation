@@ -82,12 +82,12 @@ public class CashInDTO {
 	}
 
 
-	public Clients getClients() {
+	public Clients getClient() {
 		return client;
 	}
 
 
-	public void setClients(Clients client) {
+	public void setClient(Clients client) {
 		this.client = client;
 	}
 

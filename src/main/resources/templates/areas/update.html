@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" 
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layouts/main_layout}">
+    <head>
+        <title>Update Location</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    </head>
+    <body>
+        <div layout:fragment="breadcrumb">
+            <div class="col-sm-6">
+                <h1>Locations List</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a th:href="@{/areas/index}" >Locations List</a></li>
+                    <li class="breadcrumb-item active">Update Location</li>
+                </ol>
+            </div>
+        </div>
+        <div layout:fragment="content">
+            <div class="card card-info">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-edit"></i>
+                        Update Location
+                    </h3>
+                </div>
+                <form th:action="@{/areas/update/{id}(id=${areadto.id})}" th:object="${areadto}" method="POST" form="areasform">
+                    <input type="hidden" th:field="*{id}" />
+                    <div class="card-body">  
+                        <div class="row">
+		                	<div class="col-sm-4">    	
+		                        <div class="form-group">
+		                            <label for="areaCode">Area Code</label>
+		                            <input class="form-control" type="text" th:field="*{areaCode}" id="areaCode" placeholder="Enter Area Code" />
+		                            <div class="alert alert-danger" th:if="${#fields.hasErrors('areaCode')}" th:errors="*{areaCode}"></div>
+		                        </div>
+		                     </div>
+		                	<div class="col-sm-4"> 
+		                        <div class="form-group col">
+		                            <label for="areaName">Area Name</label>
+		                            <input class="form-control" type="text" th:field="*{areaName}" id="areaName" placeholder="Enter Area Name" />
+		                            <div class="alert alert-danger" th:if="${#fields.hasErrors('areaName')}" th:errors="*{areaName}"></div>
+		                        </div>
+		                     </div>
+		                	<div class="col-sm-4"> 
+		                        <div class="form-group">
+		                            <label for="transportCharges">Transport Rates</label>
+		                            <input class="form-control" type="text" th:field="*{transportCharges}" id="transportCharges" placeholder="Enter Transport Rates" />
+		                            <div class="alert alert-danger" th:if="${#fields.hasErrors('transportCharges')}" th:errors="*{transportCharges}"></div>
+		                        </div>
+		                     </div>
+		                	
+	                	</div>
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </form> 
+            </div>
+        </div>
+    </body>
+</html>

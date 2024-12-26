@@ -87,8 +87,7 @@
 	                                            </p>
 	                                        </a>	                                        
 	                                    </li>
-	                                </ul>
-		                                
+	                                </ul> 
 	                                <ul class="nav nav-treeview">
 		                                    <li class="nav-item">
 		                                        <a href="#" th:href="@{/billings/index}" class="nav-link">
@@ -117,7 +116,7 @@
 	                                        <a href="#" class="nav-link">
 	                                            <i class="far fa-circle nav-icon"></i>
 	                                            <p>
-	                                                Houses Reports
+	                                                Clients Reports
 	                                                <i class="right fas fa-angle-left"></i>
 	                                            </p>
 	                                        </a>
@@ -139,8 +138,39 @@
 		                             </ul>
 		                                
                             </li>
-                            <li class="nav-item menu-open">
-                                <a href="#" class="nav-link active">
+                            <li class="nav-item">
+                                <a href="#" class="nav-link ">
+                                    <i class="nav-icon fas fas fa-coins"></i>
+                                    <p>
+                                        Cash Flows
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>                                
+	                                <ul class="nav nav-treeview">
+	                                    <li class="nav-item">
+	                                        <a href="#" th:href="@{/cashIn/index}" class="nav-link">
+	                                            <i class="far fa-circle nav-icon"></i>
+	                                            <p>
+	                                                Cash In
+	                                                <i class="right fas fa-angle-left"></i>
+	                                            </p>
+	                                        </a>	                                        
+	                                    </li>
+	                                </ul> 
+	                                <ul class="nav nav-treeview">
+		                                    <li class="nav-item">
+		                                        <a href="#" th:href="@{/cashOut/index}" class="nav-link">
+		                                            <i class="far fa-circle nav-icon"></i>
+		                                            <p>
+		                                                Cash Out
+		                                                <i class="right fas fa-angle-left"></i>
+		                                            </p>
+	                                        	</a>
+			                                 </li>
+	                                 </ul>				                                	                                
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
                                     <i class="nav-icon fas fas fa-users-cog"></i>
                                     <p>
                                         User Management
@@ -170,56 +200,57 @@
                                         </a>                                        
                                     </li>
                                 </ul>
-                          
-                                
+                                                          
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
-                                        <a href="#" th:href="@{/plots/index}" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>
-                                               Plots
-                                                <i class="right fas fa-angle-left"></i>
-                                            </p>
-                                        </a>                                        
-                                    </li>
-                                </ul>
-                              
-                                 
-                                <ul class="nav nav-treeview">
-                                    <li class="nav-item">
-                                        <a href="#" th:href="@{/houses/index}" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>
-                                               Houses
-                                                <i class="right fas fa-angle-left"></i>
-                                            </p>
-                                        </a>                                        
-                                    </li>
-                                </ul>
-                              
-                              
-                                
-                                <ul class="nav nav-treeview">
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link">
+                                        <a href="#" th:href="@{/clients/index}" class="nav-link">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>
                                                Clients
                                                 <i class="right fas fa-angle-left"></i>
                                             </p>
-                                        </a>
-                                  <!--      <ul class="nav nav-treeview">
-                                            <li class="nav-item">
-                                                <a href="#" th:href="@{/clients/index}" class="nav-link">
-                                                    <i class="fa fa-list-alt nav-icon"></i>
-                                                    <p>List</p>
-                                                </a>
-                                            </li>
-                                        </ul>	-->
+                                        </a>                                 
                                     </li>
                                 </ul>
                                 
                                 
+                            </li>
+                            
+                             <li class="nav-item menu-open">
+                                <a href="#" class="nav-link active">
+                                    <i class="nav-icon fas fas fa-map-marker"></i>
+                                    <p>
+                                        App Helpers
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>     
+                                
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="#" th:href="@{/areas/index}" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>
+                                                Locations
+                                                <i class="right fas fa-angle-left"></i>
+                                            </p>
+                                        </a>                                        
+                                    </li>
+                                </ul>
+                                                                                             
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="#" th:href="@{/designations/index}" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>
+                                                Designations
+                                                <i class="right fas fa-angle-left"></i>
+                                            </p>
+                                        </a>                                        
+                                    </li>
+                                </ul>
+                               
+                                
+                                                                                           
                             </li>
                         </ul>
                     </nav>

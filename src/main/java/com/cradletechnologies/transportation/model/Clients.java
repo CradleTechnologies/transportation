@@ -77,10 +77,15 @@ public class Clients implements Serializable {
 	    @Size(min = 1, max = 100)
 	    @Column(name = "status", nullable = false, length = 100)
 	    private String status;
+	    
+	    @Basic(optional = true)
+	    @Size(min = 1, max = 1000)
+	    @Column(name = "remarks", nullable = true, length = 1000)
+	    private String remarks;
 
 	    @JoinColumn(name = "area_id", referencedColumnName = "id", nullable = false)
 	    @ManyToOne(optional = false)
-	    private Areas areas;
+	    private Areas area;
 
 	    @JoinColumn(name = "audit_identifier_id", referencedColumnName = "identifier_id", nullable = false)
 	    @ManyToOne(optional = false)
@@ -96,11 +101,13 @@ public class Clients implements Serializable {
 			this.id = id;
 		}
     	
+		
+
 		public Clients(int id, @NotNull @Size(min = 1, max = 255) String firstName,
 				@NotNull @Size(min = 1, max = 255) String lastName,
 				@NotNull @Size(min = 1, max = 255) String clientName, @Size(min = 1, max = 400) String emailAddress,
 				@NotNull @Size(min = 1, max = 100) String telNo, @NotNull @Size(min = 1, max = 100) String status,
-				Areas areas) {
+				@Size(min = 1, max = 1000) String remarks, Areas area) {
 			super();
 			this.id = id;
 			this.firstName = firstName;
@@ -109,14 +116,15 @@ public class Clients implements Serializable {
 			this.emailAddress = emailAddress;
 			this.telNo = telNo;
 			this.status = status;
-			this.areas = areas;
+			this.remarks = remarks;
+			this.area = area;
 		}
 
 		public Clients(@NotNull @Size(min = 1, max = 255) String firstName,
 				@NotNull @Size(min = 1, max = 255) String lastName,
 				@NotNull @Size(min = 1, max = 255) String clientName, @Size(min = 1, max = 400) String emailAddress,
 				@NotNull @Size(min = 1, max = 100) String telNo, @NotNull @Size(min = 1, max = 100) String status,
-				Areas areas) {
+				@Size(min = 1, max = 1000) String remarks, Areas area) {
 			super();
 			this.firstName = firstName;
 			this.lastName = lastName;
@@ -124,7 +132,8 @@ public class Clients implements Serializable {
 			this.emailAddress = emailAddress;
 			this.telNo = telNo;
 			this.status = status;
-			this.areas = areas;
+			this.remarks = remarks;
+			this.area = area;
 		}
 
 		public int getId() {
@@ -183,12 +192,20 @@ public class Clients implements Serializable {
 			this.status = status;
 		}
 
-		public Areas getAreas() {
-			return areas;
+		public String getRemarks() {
+			return remarks;
 		}
 
-		public void setAreas(Areas areas) {
-			this.areas = areas;
+		public void setRemarks(String remarks) {
+			this.remarks = remarks;
+		}
+
+		public Areas getArea() {
+			return area;
+		}
+
+		public void setArea(Areas area) {
+			this.area = area;
 		}
 
 		public AuditIdentifier getAuditIdentifierId() {

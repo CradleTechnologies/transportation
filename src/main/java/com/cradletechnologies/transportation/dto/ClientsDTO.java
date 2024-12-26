@@ -19,8 +19,10 @@ public class ClientsDTO implements Serializable {
 	    private String telNo;
 	    
 	    private String status;
+	    
+	    private String remarks;
 
-	    private Areas areas;
+	    private Areas area;
 
 		public ClientsDTO() {
 			
@@ -31,7 +33,7 @@ public class ClientsDTO implements Serializable {
 			this.id = id;
 		}
     	
-	    public ClientsDTO(int id, String firstName, String lastName, String clientName, String emailAddress, String telNo, String status, Areas areas) {
+	    public ClientsDTO(int id, String firstName, String lastName, String clientName, String emailAddress, String telNo, String status, String remarks, Areas area) {
 			super();
 			this.id = id;
 			this.firstName = firstName;
@@ -40,10 +42,11 @@ public class ClientsDTO implements Serializable {
 			this.emailAddress = emailAddress;
 			this.telNo = telNo;
 			this.status= status;
-			this.areas = areas;
+			this.remarks= remarks;
+			this.area = area;
 		}
 
-		public ClientsDTO(String firstName, String lastName, String clientName, String emailAddress, String telNo, String status, Areas areas) {
+		public ClientsDTO(String firstName, String lastName, String clientName, String emailAddress, String telNo, String status, String remarks, Areas area) {
 			super();
 			this.firstName = firstName;
 			this.lastName = lastName;
@@ -51,7 +54,8 @@ public class ClientsDTO implements Serializable {
 			this.emailAddress = emailAddress;
 			this.telNo = telNo;
 			this.status= status;
-			this.areas = areas;
+			this.remarks= remarks;
+			this.area = area;
 		}
 
 		public int getId() {
@@ -110,12 +114,20 @@ public class ClientsDTO implements Serializable {
 			this.status = status;
 		}
 
-		public Areas getAreas() {
-			return areas;
+		public String getRemarks() {
+			return remarks;
 		}
 
-		public void setAreas(Areas areas) {
-			this.areas = areas;
+		public void setRemarks(String remarks) {
+			this.remarks = remarks;
+		}
+
+		public Areas getArea() {
+			return area;
+		}
+
+		public void setArea(Areas area) {
+			this.area = area;
 		}
 
 		//check out

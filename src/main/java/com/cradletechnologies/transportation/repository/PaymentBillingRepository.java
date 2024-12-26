@@ -18,7 +18,7 @@ public interface PaymentBillingRepository  extends JpaRepository<PaymentBilling,
 
 	@Modifying
     @Query(
-            value = "truncate table payment_billing",
+            value = "truncate table payment_transportation",
             nativeQuery = true
     )
     void truncatePaymentBilling();
@@ -26,7 +26,7 @@ public interface PaymentBillingRepository  extends JpaRepository<PaymentBilling,
 	@Modifying
     @Query(
             value = "INSERT INTO \r\n"
-            		+ "payment_billing  \r\n"
+            		+ "payment_transportation  \r\n"
             		+ "(record_date, client_id, payment_id, transportation_id, amount) \r\n"
             		+ "SELECT payment_date, client_id, id, '0', amount_paid\r\n"
             		+ "FROM payments ;\r\n"
@@ -38,9 +38,9 @@ public interface PaymentBillingRepository  extends JpaRepository<PaymentBilling,
 	@Modifying
     @Query(
             value = "INSERT INTO \r\n"
-            		+ "payment_billing  \r\n"
+            		+ "payment_transportation  \r\n"
             		+ "(record_date, client_id, payment_id, transportation_id, amount)\r\n"
-            		+ "SELECT record_date, client_id, '0', id, -transportation_charges \r\n"
+            		+ "SELECT transport_date, client_id, '0', id, -transport_charges \r\n"
             		+ "FROM transportations ;\r\n"
             		+ " ",
             nativeQuery = true
