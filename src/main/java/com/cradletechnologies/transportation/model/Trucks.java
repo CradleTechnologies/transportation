@@ -13,6 +13,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -50,6 +51,9 @@ public class Trucks implements Serializable {
 	    @NotNull
 	    @Column(name = "description", nullable = false, length=1000)
 	    private String description;
+
+		@Column(name = "truck_picture", nullable = false, length = 255)
+		private String truckPicture;	
 	    
 	    @JoinColumn(name = "staff_id", referencedColumnName = "id", nullable = false)
 	    @ManyToOne(optional = false)
@@ -59,7 +63,7 @@ public class Trucks implements Serializable {
 	    @JoinColumn(name = "company_id", referencedColumnName = "id", nullable = false)
 	    @ManyToOne(optional = false)
 	    private Companies company;
-	    
+
 	    
 	    @JoinColumn(name = "audit_identifier_id", referencedColumnName = "identifier_id", nullable = false)
 	    @ManyToOne(optional = false)
@@ -70,100 +74,101 @@ public class Trucks implements Serializable {
 
 		}
 
-
 		public Trucks(int id, @NotNull @Size(min = 1, max = 400) String registrationNo, @NotNull Double capacity,
-				@NotNull String description, Staffs staff, Companies company) {
+				@NotNull String description, String truckPicture, Staffs staff, Companies company) {
 			super();
 			this.id = id;
 			this.registrationNo = registrationNo;
 			this.capacity = capacity;
 			this.description = description;
+			this.truckPicture = truckPicture;
 			this.staff = staff;
 			this.company = company;
 		}
 
-
 		public Trucks(@NotNull @Size(min = 1, max = 400) String registrationNo, @NotNull Double capacity,
-				@NotNull String description, Staffs staff, Companies company) {
+				@NotNull String description, String truckPicture, Staffs staff, Companies company) {
 			super();
 			this.registrationNo = registrationNo;
 			this.capacity = capacity;
 			this.description = description;
+			this.truckPicture = truckPicture;
 			this.staff = staff;
 			this.company = company;
 		}
-
 
 		public int getId() {
 			return id;
 		}
 
-
 		public void setId(int id) {
 			this.id = id;
 		}
-
 
 		public String getRegistrationNo() {
 			return registrationNo;
 		}
 
-
 		public void setRegistrationNo(String registrationNo) {
 			this.registrationNo = registrationNo;
 		}
-
 
 		public Double getCapacity() {
 			return capacity;
 		}
 
-
 		public void setCapacity(Double capacity) {
 			this.capacity = capacity;
 		}
-
 
 		public String getDescription() {
 			return description;
 		}
 
-
 		public void setDescription(String description) {
 			this.description = description;
 		}
 
+		public String getTruckPicture() {
+			return truckPicture;
+		}
+
+		public void setTruckPicture(String truckPicture) {
+			this.truckPicture = truckPicture;
+		}
 
 		public Staffs getStaff() {
 			return staff;
 		}
 
-
 		public void setStaff(Staffs staff) {
 			this.staff = staff;
 		}
-
 
 		public Companies getCompany() {
 			return company;
 		}
 
-
 		public void setCompany(Companies company) {
 			this.company = company;
 		}
 
-
 		public AuditIdentifier getAuditIdentifierId() {
 			return auditIdentifierId;
 		}
-
 
 		public void setAuditIdentifierId(AuditIdentifier auditIdentifierId) {
 			this.auditIdentifierId = auditIdentifierId;
 		}
 
 
+		@Transient
+		public String getTruckPicturePath() {
+			if(truckPicture == null || id == 0) return null;
+			return "/truck-pictures/"+id+"/"+truckPicture;
+		}
+
+	    
 		@Override
 		public String toString() {
 			return "Trucks [registrationNo=" + registrationNo + ", description=" + description + "]";

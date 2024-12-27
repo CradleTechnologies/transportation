@@ -29,7 +29,7 @@
                         New Truck
                     </h3>
                 </div>
-                <form th:action="@{/trucks/create}" th:object="${trucksdto}" method="POST">
+                <form th:action="@{/trucks/create}" th:object="${trucksdto}" method="POST" enctype="multipart/form-data">
                     <div class="card-body">  
 		                <div class="row">
 		                	<div class="col-sm-3">    	
@@ -42,26 +42,57 @@
 		                	<div class="col-sm-3"> 
 		                        <div class="form-group">
 		                            <label for="capacity">Capacity</label>
-		                            <input class="form-control" type="text" th:field="*{capacity}" id="capacity" placeholder="Enter Trucks Capacity" />
+		                            <input class="form-control" type="text" th:field="*{capacity}" id="capacity" placeholder="Enter Truck Capacity" />
 		                            <div class="alert alert-danger" th:if="${#fields.hasErrors('capacity')}" th:errors="*{capacity}"></div>
 		                        </div>
 		                     </div>
-		                	<div class="col-sm-3"> 
-		                        <div class="form-group col">
-		                            <label for="driversId">Drivers ID</label>
-		                            <input class="form-control" type="text" th:field="*{driversId}" id="driversId" placeholder="Enter Driver's ID" />
-		                            <div class="alert alert-danger" th:if="${#fields.hasErrors('driversId')}" th:errors="*{driversId}"></div>
-		                        </div>
-		                     </div>
-		                	<div class="col-sm-3"> 
-		                        <div class="form-group col">
-		                            <label for="driversName">Drivers Name</label>
-		                            <input class="form-control" type="text" th:field="*{driversName}" id="driversName" placeholder="Enter Driver's Name" />
-		                            <div class="alert alert-danger" th:if="${#fields.hasErrors('driversName')}" th:errors="*{driversName}"></div>
-		                        </div>
-		                     </div>
 		                	
-	                	</div>
+		                     <div class="col-md-3">
+	                            <div class="form-group">
+		                            <label class="mx-0" style="font-weight:bold;">Staffs</label>
+								<select id="staff_Id" name="staffId" th:field="*{staff}" class="form-control col-xs-12 mb-3"  required >
+									<option th:value="''" >Select Staff</option>
+									<option th:each="staffs : ${listStaffs}" th:value="${staffs.id}" th:text="${staffs.staffName}" th:selected="${staffs.id} == *{staff}"></option>	 
+								</select>												
+		                            <div class="alert alert-danger" th:if="${#fields.hasErrors('staff')}" th:errors="*{staff}"></div>
+		                        </div>
+		                    </div>
+		                 
+		                     <div class="col-md-3">
+	                            <div class="form-group">
+		                            <label class="mx-0" style="font-weight:bold;">Companies</label>
+								<select id="company_Id" name="companyId" th:field="*{company}" class="form-control col-xs-12 mb-3"  required >
+									<option th:value="''" >Select Company</option>
+									<option th:each="companies : ${listCompanies}" th:value="${companies.id}" th:text="${companies.name}" th:selected="${companies.id} == *{company}"></option>	 
+								</select>												
+		                            <div class="alert alert-danger" th:if="${#fields.hasErrors('company')}" th:errors="*{company}"></div>
+		                        </div>
+		                    </div>  
+		                    
+                            <div class="col-md-6">                            
+                                <div class="form-group">
+                                    <label for="truckPicture">Truck Picture</label>
+                                    <input class="form-control" type="file" th:field="*{truckPicture}" id="truckPicture" placeholder="picture" required accept="image/png, image/jpeg" />
+                                    <div class="alert alert-danger" th:if="${#fields.hasErrors('truckPicture')}" th:errors="*{truckPicture}"></div>
+                                </div>
+                            </div>
+		                
+                             <div class="col-md-6">                            
+                                <div class="form-group">
+                                    <p class="card" style="height:200px; overflow:scroll;">
+										<img class="text-center my-auto" id="thumbnail" th:src="@{*{getTruckPicturePath}}" style="width:100%;" alt="truck-picture" />																	      
+									</p>
+                                </div>
+                            </div>   
+		                	<div class="col-md-12">
+	                            	<div class="form-group">
+		                            	<label for="description">Description</label>
+		                            	<textarea rows="6" cols="120" class="form-control" type="text" th:field="*{description}" id="description" placeholder="Required description" required></textarea>
+		                            	<div class="alert alert-danger" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
+		                        	</div>
+		                    	</div>
+                        	 </div>                           
+		                	                         
                     </div>
                     <div class="card-footer">
                         <button type="submit" class="btn btn-primary">Save</button>
@@ -69,5 +100,27 @@
                 </form> 
             </div>
         </div>
+        
+        <div layout:fragment="page_specific_scripts">
+            
+            <script th:inline="javascript">
+                $(document).ready(()=>{
+			      $('#truckPicture').change(function(){
+			        const file = this.files[0];
+			        console.log(file);
+			        if (file){
+			          let reader = new FileReader();
+			          reader.onload = function(event){
+			            console.log(event.target.result);
+			            $('#thumbnail').attr('src', event.target.result);
+			          }
+			          reader.readAsDataURL(file);
+			        }
+			      });
+			    });
+            </script>
+            
+        </div>
+        
     </body>
 </html>

@@ -76,7 +76,7 @@
                             <div class="col-sm-3"> 
 		                        <div class="form-group">		                            
 		                            <label class="mx-0" style="font-weight:bold;">Status</label> 
-									<select id="status" name="status" th:field="*{status}" class="form-control col-xs-12 mb-2"  required="true" />
+									<select id="status" name="status" th:field="*{status}" class="form-control col-xs-12 mb-2"  required >
 										<option th:value="''" >Select Status</option>
 										<option th:value="ACTIVE" th:text="ACTIVE" th:selected="ACTIVE == *{status}"></option>
 					        			<option th:value="DORMANT" th:text="DORMANT" th:selected="DORMANT == *{status}"></option>	 
@@ -88,7 +88,7 @@
 		                     <div class="col-md-3">
 	                            <div class="form-group">
 		                            <label class="mx-0" style="font-weight:bold;">Area</label> 
-									<select id="area_Id" name="areaId" th:field="*{area}" class="form-control col-xs-12 mb-3"  required="true" />
+									<select id="area_Id" name="areaId" th:field="*{area}" class="form-control col-xs-12 mb-3"  required >
 										<option th:value="''" >Select Area</option>
 										<option th:each="areas : ${listAreas}" th:value="${areas.id}" th:text="${areas.areaName}" th:selected="${areas.id} == *{area.id}"></option>	 
 									</select>	

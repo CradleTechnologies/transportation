@@ -1,10 +1,8 @@
 package com.cradletechnologies.transportation.dto;
 
-import java.io.Serializable;
-
 import com.cradletechnologies.transportation.model.Areas;
 
-public class CompaniesDTO implements Serializable {
+public class CompaniesDTO {
 
 	private int id;
 	
@@ -68,7 +66,7 @@ public class CompaniesDTO implements Serializable {
 	}
 
 
-	public void setRegion(Areas area) {
+	public void setArea(Areas area) {
 		this.area = area;
 	}
 

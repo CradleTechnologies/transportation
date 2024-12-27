@@ -2,17 +2,21 @@ package com.cradletechnologies.transportation.dto;
 
 import java.util.Date;
 
+import com.cradletechnologies.transportation.model.Clients;
+import com.cradletechnologies.transportation.model.Payments;
+import com.cradletechnologies.transportation.model.Transportations;
+
 public class PaymentBillingDTO {
 
 	private int id;
 	
 	private Date recordDate;
 	
-	private int clientId;
+	private Clients clientId;
 	
-	private int paymentId;
+	private Payments paymentId;
 	
-	private int transportationId;
+	private Transportations transportationId;
 	
 	private double amount;
 
@@ -22,7 +26,8 @@ public class PaymentBillingDTO {
 	}
 
 
-	public PaymentBillingDTO(int id, Date recordDate, int clientId, int paymentId, int transportationId, double amount) {
+	public PaymentBillingDTO(int id, Date recordDate, Clients clientId, Payments paymentId,
+			Transportations transportationId, double amount) {
 		super();
 		this.id = id;
 		this.recordDate = recordDate;
@@ -33,7 +38,8 @@ public class PaymentBillingDTO {
 	}
 
 
-	public PaymentBillingDTO(Date recordDate, int clientId, int paymentId, int transportationId, double amount) {
+	public PaymentBillingDTO(Date recordDate, Clients clientId, Payments paymentId, Transportations transportationId,
+			double amount) {
 		super();
 		this.recordDate = recordDate;
 		this.clientId = clientId;
@@ -63,35 +69,34 @@ public class PaymentBillingDTO {
 	}
 
 
-	public int getClientId() {
+	public Clients getClientId() {
 		return clientId;
 	}
 
 
-	public void setClientId(int clientId) {
+	public void setClientId(Clients clientId) {
 		this.clientId = clientId;
 	}
 
 
-	public int getPaymentId() {
+	public Payments getPaymentId() {
 		return paymentId;
 	}
 
 
-	public void setPaymentId(int paymentId) {
+	public void setPaymentId(Payments paymentId) {
 		this.paymentId = paymentId;
 	}
 
 
-	public int getTransportationId() {
+	public Transportations getTransportationId() {
 		return transportationId;
 	}
 
 
-	public void setTransportationId(int transportationId) {
+	public void setTransportationId(Transportations transportationId) {
 		this.transportationId = transportationId;
 	}
-
 
 
 	public double getAmount() {
@@ -106,8 +111,7 @@ public class PaymentBillingDTO {
 
 	@Override
 	public String toString() {
-		return "PaymentBillingDTO [id=" + id + "]";
+		return "PaymentBillingDTO [id=" + id + ", amount=" + amount + "]";
 	}
-
 
 }

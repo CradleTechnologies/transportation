@@ -13,9 +13,9 @@ import java.security.Security;
 import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
-import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Base64;
-import java.util.Date;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -108,8 +108,13 @@ public class HelperUtility {
         return toBase64String(concatenatedString);
     }
 
-    public static String getTransactionTimestamp() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
-        return dateFormat.format(new Date());
-    }
+//    public static String getTransactionTimestamp() {
+//        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+//        return dateFormat.format(new Date());
+//    }
+
+	public static String getTransactionTimestamp() {
+	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+	    return LocalDateTime.now().format(formatter);
+	}
 }

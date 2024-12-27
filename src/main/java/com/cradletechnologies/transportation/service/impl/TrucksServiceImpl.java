@@ -25,8 +25,8 @@ public class TrucksServiceImpl implements TrucksService{
 	}
 
 	@Override
-	public void saveTruck(Trucks truck) {
-		this.trucksRepository.save(truck);
+	public Trucks saveTruck(Trucks truck) {
+		return this.trucksRepository.save(truck);
 		
 	}
 

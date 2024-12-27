@@ -8,6 +8,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
@@ -32,14 +34,20 @@ public class PaymentBilling implements Serializable{
 	@Column(name = "record_date", nullable = false, length = 200)
 	private Date recordDate;
 	
-	@Column(name = "client_id", nullable = false, length = 200)
-	private int clientId;
+//	@Column(name = "client_id", nullable = false, length = 200)
+	@JoinColumn(name = "client_id", referencedColumnName = "id", nullable = false)
+    @ManyToOne(optional = false)
+	private Clients clientId;
 	
-	@Column(name = "payment_id", nullable = false, length = 200)
-	private int paymentId;
+//	@Column(name = "payment_id", nullable = false, length = 200)
+	@JoinColumn(name = "payment_id", referencedColumnName = "id", nullable = false)
+    @ManyToOne(optional = false)
+	private Payments paymentId;
 	
-	@Column(name = "transportation_id", nullable = false, length = 200)
-	private int transportationId;
+//	@Column(name = "transportation_id", nullable = false, length = 200)
+	@JoinColumn(name = "transportation_id", referencedColumnName = "id", nullable = false)
+    @ManyToOne(optional = false)
+	private Transportations transportationId;
 	
 	@Column(name = "amount", nullable = false, length = 200)
 	private double amount;
@@ -51,7 +59,8 @@ public class PaymentBilling implements Serializable{
 	}
 
 
-	public PaymentBilling(int id, Date recordDate, int clientId, int paymentId, int transportationId, double amount) {
+	public PaymentBilling(int id, Date recordDate, Clients clientId, Payments paymentId,
+			Transportations transportationId, double amount) {
 		super();
 		this.id = id;
 		this.recordDate = recordDate;
@@ -62,7 +71,8 @@ public class PaymentBilling implements Serializable{
 	}
 
 
-	public PaymentBilling(Date recordDate, int clientId, int paymentId, int transportationId, double amount) {
+	public PaymentBilling(Date recordDate, Clients clientId, Payments paymentId, Transportations transportationId,
+			double amount) {
 		super();
 		this.recordDate = recordDate;
 		this.clientId = clientId;
@@ -92,35 +102,34 @@ public class PaymentBilling implements Serializable{
 	}
 
 
-	public int getClientId() {
+	public Clients getClientId() {
 		return clientId;
 	}
 
 
-	public void setClientId(int clientId) {
+	public void setClientId(Clients clientId) {
 		this.clientId = clientId;
 	}
 
 
-	public int getPaymentId() {
+	public Payments getPaymentId() {
 		return paymentId;
 	}
 
 
-	public void setPaymentId(int paymentId) {
+	public void setPaymentId(Payments paymentId) {
 		this.paymentId = paymentId;
 	}
 
 
-	public int getTransportationId() {
+	public Transportations getTransportationId() {
 		return transportationId;
 	}
 
 
-	public void setTransportationId(int transportationId) {
+	public void setTransportationId(Transportations transportationId) {
 		this.transportationId = transportationId;
 	}
-
 
 
 	public double getAmount() {
@@ -133,16 +142,9 @@ public class PaymentBilling implements Serializable{
 	}
 
 
-	
-	//To String
 	@Override
 	public String toString() {
-		return "PaymentBilling [id=" + id + "]";
+		return "PaymentBilling [id=" + id + ", amount=" + amount + "]";
 	}
-
-	
-	
-	
-	
 
 }

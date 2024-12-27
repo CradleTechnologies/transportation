@@ -60,15 +60,15 @@
                                     <div class="alert alert-danger" th:if="${#fields.hasErrors('staffName')}" th:errors="*{staffName}"></div>
                                 </div>
                             </div> 
-		                     <div class="col-md-2">
+		                      <div class="col-md-2">
 	                            <div class="form-group">
-		                            <label class="mx-0" style="font-weight:bold;">Staff Category</label>
-								<select id="categories_Id" name="categoriesId" th:field="*{categories}" class="form-control col-xs-12 mb-3"  required="true" />
-									<option th:value="''" >Select Category</option>
-									<option th:each="category : ${listCategories}" th:value="${category.id}" th:text="${category.name}" th:selected="${category.id} == *{categories}"></option>	 
+		                            <label class="mx-0" style="font-weight:bold;">Staff Designation</label>
+								<select id="designations_Id" name="designationsId" th:field="*{designation}" class="form-control col-xs-12 mb-3"  required >
+									<option th:value="''" >Select Designation</option>
+									<option th:each="designations : ${listDesignations}" th:value="${designations.id}" th:text="${designations.name}" th:selected="${designations.id} == *{designation}"></option>	 
 								</select>			
 										
-		                            <div class="alert alert-danger" th:if="${#fields.hasErrors('categories')}" th:errors="*{categories}"></div>
+		                            <div class="alert alert-danger" th:if="${#fields.hasErrors('designation')}" th:errors="*{designation}"></div>
 		                        </div>
 		                    </div>
 		                    
@@ -81,39 +81,12 @@
                             </div> 	                     
                             <div class="col-md-2">
                                 <div class="form-group">
-                                    <label for="telNo">Tel No</label>
+                                    <label for="telNo">Telephone No</label>
                                     <input class="form-control" type="text" th:field="*{telNo}" id="telNo" placeholder="enter Tel Number" />
                                     <div class="alert alert-danger" th:if="${#fields.hasErrors('telNo')}" th:errors="*{telNo}"></div>
                                 </div>
                             </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label for="upiNo">UPI No.</label>
-                                    <input class="form-control" type="text" th:field="*{upiNo}" id="upiNo" placeholder="enter UPI number" />
-                                    <div class="alert alert-danger" th:if="${#fields.hasErrors('upiNo')}" th:errors="*{upiNo}"></div>
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label for="nssfNo">NSSF No.</label>
-                                    <input class="form-control" type="text" th:field="*{nssfNo}" id="nssfNo" placeholder="enter NSSF number" />
-                                    <div class="alert alert-danger" th:if="${#fields.hasErrors('nssfNo')}" th:errors="*{nssfNo}"></div>
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label for="nhifNo">NHIF No.</label>
-                                    <input class="form-control" type="text" th:field="*{nhifNo}" id="nhifNo" placeholder="enter NHIF number" />
-                                    <div class="alert alert-danger" th:if="${#fields.hasErrors('nhifNo')}" th:errors="*{nhifNo}"></div>
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label for="employeeNo">Employee No.</label>
-                                    <input class="form-control" type="text" th:field="*{employeeNo}" id="employeeNo" placeholder="enter Employee no." />
-                                    <div class="alert alert-danger" th:if="${#fields.hasErrors('employeeNo')}" th:errors="*{employeeNo}"></div>
-                                </div>
-                            </div>
+                            
                             <div class="col-sm-2"> 
 		                        <div class="form-group">		                            
 		                            <label class="mx-0" style="font-weight:bold;">Gender</label> 
@@ -222,8 +195,54 @@
             </div>
         </div>
         
+        
         <div layout:fragment="page_specific_scripts">
+           
             
+            <script type="text/javascript">
+	            $(document).ready(() => {
+	                // Make staffName readonly and style it
+	                $('#staffName').prop('readonly', true);
+	                $('#staffName').css({
+	                    'font-size': '20px', 
+	                    'font-weight': 'bold', 
+	                    'color': 'blue'
+	                });
+	               	               
+	                function updateClientName() {
+	                    const firstName = $('#firstName').val().trim();
+	                    const lastName = $('#lastName').val().trim();
+	                    const staffName = firstName + '_' + lastName;
+	                    $('#staffName').val(staffName);
+	                }
+	
+	                updateClientName();
+	
+	                $('#firstName').on('input', updateClientName);
+	                $('#lastName').on('input', updateClientName);
+	
+	                function validateForm() {
+	                    const firstName = $('#firstName').val().trim();
+	                    const lastName = $('#lastName').val().trim();
+	
+	                    if (firstName === '' || lastName === '') {
+	                        alert('Please enter both first name and last name.');
+	                        return false;
+	                    }
+	
+	                    if ($('#staffName').val().trim() === '') {
+	                        alert('Please update the staff name.');
+	                        return false;
+	                    }	
+	                    
+	                    return true;
+	                }
+	
+	                $('form').on('submit', validateForm);
+	            });
+
+			</script>
+			 
             <script th:inline="javascript">
                 $(document).ready(()=>{
 			      $('#staffPicture').change(function(){
@@ -256,9 +275,7 @@
 			        }
 			      });
 			    });
-            </script
-            	
-        </div>
-        
+            </script>
+      	</div>
     </body>
 </html>

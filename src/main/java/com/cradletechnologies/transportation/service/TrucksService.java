@@ -11,7 +11,7 @@ public interface TrucksService {
 
 	List<Trucks> getAllTrucks();
 	
-	void saveTruck(Trucks truck);
+	Trucks saveTruck(Trucks truck);
 	
 	Trucks getTruck(int id);
 	

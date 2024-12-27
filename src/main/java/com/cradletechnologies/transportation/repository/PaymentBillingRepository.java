@@ -52,9 +52,9 @@ public interface PaymentBillingRepository  extends JpaRepository<PaymentBilling,
 	//Reports
 	@Query("SELECT DISTINCT new com.cradletechnologies.transportation.model.ClientsList_Report(c.id, c.firstName, c.lastName, c.clientName, c.status,  COALESCE(-sum(pm.amountPaid),0)+COALESCE(sum(t.transportCharges),0) ) \r\n"
 			+ "FROM PaymentBilling pb \r\n"
-			+ "LEFT JOIN Clients c ON pb.clientId = c.id \r\n"
-			+ "LEFT JOIN Transportations t ON pb.transportationId = t.id \r\n"
-			+ "LEFT JOIN Payments pm ON pb.paymentId = pm.id \r\n"
+			+ "LEFT JOIN Clients c ON pb.clientId.id = c.id \r\n"
+			+ "LEFT JOIN Transportations t ON pb.transportationId.id = t.id \r\n"
+			+ "LEFT JOIN Payments pm ON pb.paymentId.id = pm.id \r\n"
 			+ "WHERE c.status = 'ACTIVE' \r\n"
 			+ "GROUP BY c.id \r\n"
 			+ "ORDER BY c.id ASC")
@@ -82,9 +82,9 @@ public interface PaymentBillingRepository  extends JpaRepository<PaymentBilling,
 
 	@Query("SELECT DISTINCT new com.cradletechnologies.transportation.model.ClientsList_Report(c.id, c.firstName, c.lastName, c.clientName, c.status,  COALESCE(-sum(pm.amountPaid),0)+COALESCE(sum(t.transportCharges),0) ) \r\n"
 			+ "FROM PaymentBilling pb \r\n"
-			+ "LEFT JOIN Clients c ON pb.clientId = c.id \r\n"
-			+ "LEFT JOIN Transportations t ON pb.transportationId = t.id \r\n"
-			+ "LEFT JOIN Payments pm ON pb.paymentId = pm.id \r\n"
+			+ "LEFT JOIN Clients c ON pb.clientId.id = c.id \r\n"
+			+ "LEFT JOIN Transportations t ON pb.transportationId.id = t.id \r\n"
+			+ "LEFT JOIN Payments pm ON pb.paymentId.id = pm.id \r\n"
 			+ "WHERE c.status = 'ACTIVE' \r\n"
 			+ "GROUP BY c.id \r\n"
 			+ "ORDER BY c.id ASC")
@@ -95,9 +95,9 @@ public interface PaymentBillingRepository  extends JpaRepository<PaymentBilling,
 	
 	@Query("SELECT DISTINCT new com.cradletechnologies.transportation.model.ClientsList_Report(c.id, c.firstName, c.lastName, c.clientName, c.status,  COALESCE(-sum(pm.amountPaid),0)+COALESCE(sum(t.transportCharges),0) ) \r\n"
 			+ "FROM PaymentBilling pb \r\n"
-			+ "LEFT JOIN Clients c ON pb.clientId = c.id \r\n"
-			+ "LEFT JOIN Transportations t ON pb.transportationId = t.id \r\n"
-			+ "LEFT JOIN Payments pm ON pb.paymentId = pm.id \r\n"
+			+ "LEFT JOIN Clients c ON pb.clientId.id = c.id \r\n"
+			+ "LEFT JOIN Transportations t ON pb.transportationId.id = t.id \r\n"
+			+ "LEFT JOIN Payments pm ON pb.paymentId.id = pm.id \r\n"
 			+ "WHERE c.status = 'ACTIVE' \r\n"
 			+ "GROUP BY c.id \r\n"
 			+ "ORDER BY c.id ASC")

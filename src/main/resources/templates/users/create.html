@@ -73,7 +73,7 @@
                             <div class="col-sm-4"> 
 		                        <div class="form-group">		                            
 		                            <label class="mx-0" style="font-weight:bold;">Status</label> 
-									<select id="status" name="status" th:field="*{status}" class="form-control col-xs-12 mb-2"  required="true" />
+									<select id="status" name="status" th:field="*{status}" class="form-control col-xs-12 mb-2"  required >
 										<option th:value="''" >Select Status</option>
 										<option th:value="1" th:text="ACTIVE" th:selected="1 == *{status}"></option>
 					        			<option th:value="0" th:text="DORMANT" th:selected="0 == *{status}"></option>	 
@@ -93,7 +93,7 @@
 		                     <div class="col-md-6">
 	                            <div class="form-group">
 		                            <label class="mx-0" style="font-weight:bold;">User Role</label> 
-									<select id="role_Id" name="roleId" th:field="*{roles}" class="form-control col-xs-12 mb-3"  required="true" />
+									<select id="role_Id" name="roleId" th:field="*{roles}" class="form-control col-xs-12 mb-3"  required >
 										<option th:value="''" >Select Role</option>
 										<option th:each="role : ${listRoles}" th:value="${role.id}" th:text="${role.name}" th:selected="${role.id} == *{roles}"></option>	 
 									</select>	
@@ -112,7 +112,7 @@
                             <div class="col-md-6">
 	                            	<div class="form-group">
 		                            	<label for="remarks">Remarks</label>
-		                            	<textarea rows="6" cols="120" class="form-control" type="text" th:field="*{remarks}" id="remarks" placeholder="Optional remarks" />
+		                            	<textarea rows="6" cols="120" class="form-control" type="text" th:field="*{remarks}" id="remarks" placeholder="Optional remarks" ></textarea>
 		                            	<div class="alert alert-danger" th:if="${#fields.hasErrors('remarks')}" th:errors="*{remarks}"></div>
 		                        	</div>
 		                    	</div>

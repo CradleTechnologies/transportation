@@ -18,6 +18,8 @@ public class TransportationsDTO {
 
 	    private Double transportCharges;
 	    
+	    private String transportDetails;
+
 	    private Trucks truck;
 	    
 	    private Areas area;
@@ -29,25 +31,27 @@ public class TransportationsDTO {
 			}
 
 		public TransportationsDTO(int id, Date transportDate, Date offLoadingDate, String status,
-				Double transportCharges, Trucks truck, Areas area, Clients client) {
+				Double transportCharges, String transportDetails, Trucks truck, Areas area, Clients client) {
 			super();
 			this.id = id;
 			this.transportDate = transportDate;
 			this.offLoadingDate = offLoadingDate;
 			this.status = status;
 			this.transportCharges = transportCharges;
+			this.transportDetails = transportDetails;
 			this.truck = truck;
 			this.area = area;
 			this.client = client;
 		}
 
 		public TransportationsDTO(Date transportDate, Date offLoadingDate, String status, Double transportCharges,
-				Trucks truck, Areas area, Clients client) {
+				 String transportDetails, Trucks truck, Areas area, Clients client) {
 			super();
 			this.transportDate = transportDate;
 			this.offLoadingDate = offLoadingDate;
 			this.status = status;
 			this.transportCharges = transportCharges;
+			this.transportDetails = transportDetails;
 			this.truck = truck;
 			this.area = area;
 			this.client = client;
@@ -93,6 +97,14 @@ public class TransportationsDTO {
 			this.transportCharges = transportCharges;
 		}
 
+		public String getTransportDetails() {
+			return transportDetails;
+		}
+
+		public void setTransportDetails(String transportDetails) {
+			this.transportDetails = transportDetails;
+		}
+
 		public Trucks getTruck() {
 			return truck;
 		}
@@ -119,7 +131,9 @@ public class TransportationsDTO {
 
 		@Override
 		public String toString() {
-			return "TransportationsDTO [transportDate=" + transportDate + ", status=" + status + ", transportCharges="
-					+ transportCharges + ", truck=" + truck + ", area=" + area + ", client=" + client + "]";
-		}		 
+			return "TransportationsDTO [id=" + id + ", transportDate=" + transportDate + ", transportDetails="
+					+ transportDetails + ", truck=" + truck + "]";
+		}
+
+			 
 }

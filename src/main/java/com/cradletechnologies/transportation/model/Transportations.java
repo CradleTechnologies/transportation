@@ -1,7 +1,7 @@
 package com.cradletechnologies.transportation.model;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
@@ -14,9 +14,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
-import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import jakarta.xml.bind.annotation.XmlRootElement;
 
 @Entity
@@ -48,6 +46,10 @@ public class Transportations implements Serializable {
 	    @NotNull
 	    @Column(name = "transport_charges", nullable = false)
 	    private Double transportCharges;
+
+	    @Basic(optional = false)
+	    @Column(name = "transport_details", nullable = false, length = 1000)
+	    private String transportDetails;
 	    
 	    @JoinColumn(name = "truck_id", referencedColumnName = "id", nullable = false)
 	    @ManyToOne(optional = false)
@@ -72,25 +74,27 @@ public class Transportations implements Serializable {
 			}
 
 		public Transportations(int id, Date transportDate, Date offLoadingDate, String status,
-				@NotNull Double transportCharges, Trucks truck, Areas area, Clients client) {
+				@NotNull Double transportCharges, String transportDetails, Trucks truck, Areas area, Clients client) {
 			super();
 			this.id = id;
 			this.transportDate = transportDate;
 			this.offLoadingDate = offLoadingDate;
 			this.status = status;
 			this.transportCharges = transportCharges;
+			this.transportDetails = transportDetails;
 			this.truck = truck;
 			this.area = area;
 			this.client = client;
 		}
 
 		public Transportations(Date transportDate, Date offLoadingDate, String status, @NotNull Double transportCharges,
-				Trucks truck, Areas area, Clients client) {
+				String transportDetails, Trucks truck, Areas area, Clients client) {
 			super();
 			this.transportDate = transportDate;
 			this.offLoadingDate = offLoadingDate;
 			this.status = status;
 			this.transportCharges = transportCharges;
+			this.transportDetails = transportDetails;
 			this.truck = truck;
 			this.area = area;
 			this.client = client;
@@ -136,6 +140,14 @@ public class Transportations implements Serializable {
 			this.transportCharges = transportCharges;
 		}
 
+		public String getTransportDetails() {
+			return transportDetails;
+		}
+
+		public void setTransportDetails(String transportDetails) {
+			this.transportDetails = transportDetails;
+		}
+
 		public Trucks getTruck() {
 			return truck;
 		}
@@ -170,8 +182,8 @@ public class Transportations implements Serializable {
 
 		@Override
 		public String toString() {
-			return "Transportations [transportDate=" + transportDate + ", status=" + status + ", transportCharges="
-					+ transportCharges + ", truck=" + truck + ", area=" + area + ", client=" + client + "]";
+			return "Transportations [id=" + id + ", transportDate=" + transportDate + ", transportDetails="
+					+ transportDetails + ", truck=" + truck + "]";
 		}
-		 
+	 
 }

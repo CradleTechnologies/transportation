@@ -40,6 +40,18 @@ public class WebConfig implements WebMvcConfigurer {
 		Path userUploadDir = Paths.get("./user-logos");
 		String userUploadPath = userUploadDir.toFile().getAbsolutePath();
 		registry.addResourceHandler("/user-logos/**").addResourceLocations("file:/"+userUploadPath+"/");
+				
+		Path staffUploadDir = Paths.get("./staff-pictures");
+		String staffUploadPath = staffUploadDir.toFile().getAbsolutePath();
+		registry.addResourceHandler("/staff-pictures/**").addResourceLocations("file:/"+staffUploadPath+"/");
+
+		Path staffScannedUploadDir = Paths.get("./staff-scanned-documents");
+		String staffScannedUploadPath = staffScannedUploadDir.toFile().getAbsolutePath();
+		registry.addResourceHandler("/staff-scanned-documents/**").addResourceLocations("file:/"+staffScannedUploadPath+"/");
+		
+		Path truckUploadDir = Paths.get("./truck-pictures");
+		String truckUploadPath = truckUploadDir.toFile().getAbsolutePath();
+		registry.addResourceHandler("/truck-pictures/**").addResourceLocations("file:/"+truckUploadPath+"/");
 		
 	}
 

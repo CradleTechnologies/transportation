@@ -4,6 +4,8 @@ import com.cradletechnologies.transportation.model.Companies;
 import com.cradletechnologies.transportation.model.AuditIdentifier;
 import com.cradletechnologies.transportation.model.Staffs;
 
+import jakarta.persistence.Transient;
+
 public class TrucksDTO {
 
 	    private int id;
@@ -12,7 +14,9 @@ public class TrucksDTO {
 	   
 	    private Double capacity;
 	    
-	    private String description;
+	    private String description;   	
+	    
+	    private String truckPicture;	    
 	    
 	    private Staffs staff;
  
@@ -21,22 +25,26 @@ public class TrucksDTO {
 		public TrucksDTO() {
 
 		}
-
-		public TrucksDTO(int id, String registrationNo, Double capacity, String description, Staffs staff, Companies company) {
+				
+		public TrucksDTO(int id, String registrationNo, Double capacity, String description, String truckPicture,
+				Staffs staff, Companies company) {
 			super();
 			this.id = id;
 			this.registrationNo = registrationNo;
 			this.capacity = capacity;
 			this.description = description;
+			this.truckPicture = truckPicture;
 			this.staff = staff;
 			this.company = company;
 		}
 
-		public TrucksDTO(String registrationNo, Double capacity, String description, Staffs staff, Companies company) {
+		public TrucksDTO(String registrationNo, Double capacity, String description, String truckPicture, Staffs staff,
+				Companies company) {
 			super();
 			this.registrationNo = registrationNo;
 			this.capacity = capacity;
 			this.description = description;
+			this.truckPicture = truckPicture;
 			this.staff = staff;
 			this.company = company;
 		}
@@ -45,61 +53,63 @@ public class TrucksDTO {
 			return id;
 		}
 
-
 		public void setId(int id) {
 			this.id = id;
 		}
-
 
 		public String getRegistrationNo() {
 			return registrationNo;
 		}
 
-
 		public void setRegistrationNo(String registrationNo) {
 			this.registrationNo = registrationNo;
 		}
-
 
 		public Double getCapacity() {
 			return capacity;
 		}
 
-
 		public void setCapacity(Double capacity) {
 			this.capacity = capacity;
 		}
-
 
 		public String getDescription() {
 			return description;
 		}
 
-
 		public void setDescription(String description) {
 			this.description = description;
 		}
 
+		public String getTruckPicture() {
+			return truckPicture;
+		}
+
+		public void setTruckPicture(String truckPicture) {
+			this.truckPicture = truckPicture;
+		}
 
 		public Staffs getStaff() {
 			return staff;
 		}
 
-
 		public void setStaff(Staffs staff) {
 			this.staff = staff;
 		}
-
 
 		public Companies getCompany() {
 			return company;
 		}
 
-
 		public void setCompany(Companies company) {
 			this.company = company;
 		}
 
+		@Transient
+		public String getTruckPicturePath() {
+			if(truckPicture == null || id == 0) return null;
+			return "/truck-pictures/"+id+"/"+truckPicture;
+		}
 
 		@Override
 		public String toString() {
