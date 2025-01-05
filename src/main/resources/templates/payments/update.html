@@ -26,14 +26,32 @@
                 <div class="card-header">
                     <h3 class="card-title">
                         <i class="fas fa-plus"></i>
-                        New Payments
+                        Update Payments
                     </h3>
                 </div>
+                
+                 <div class="card-body"> 
+                 	<div class="row"> 
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="balanceBf_Id">Balance B/F</label>
+                                    <input class="input form-control text-center" type="text" id="balanceBf_Id" placeholder="client's balance b/f" />                                    
+                                </div>
+                            </div> 
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="balanceCf_Id">Balance C/F</label>
+                                    <input class="input form-control text-center" type="text" id="balanceCf_Id" placeholder="client's balance c/f" />                                    
+                                </div>
+                            </div> 
+                      </div>
+                  </div>
+                                                  
                 <form th:action="@{/payments/update/{id}(id=${paymentsdto.id})}" th:object="${paymentsdto}" method="POST" enctype="multipart/form-data">
                     <input type="hidden" th:field="*{id}" />
                     <div class="card-body">  
                         <div class="row"> 
-                             <div class="col-md-3">
+                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label for="paymentDate">Payment Date</label>
                                     <input class="form-control" type="date" th:field="*{paymentDate}" id="paymentDate" placeholder="enter payment date" />
@@ -41,14 +59,25 @@
                                 </div>
                             </div> 
                             
-		                     <div class="col-md-3">
+		                       <div class="col-md-2">
 	                            <div class="form-group">
-		                            <label class="mx-0" style="font-weight:bold;">Clients</label>
-								<select id="pupil_Id" name="clientId" th:field="client" class="form-control col-xs-12 mb-3"  required="true" />
+		                            <label class="mx-0" style="font-weight:bold;">Client</label>
+								<select id="client_Id" name="clientId" th:field="*{client}" class="form-control col-xs-12 mb-3"  required />
 									<option th:value="''" >Select Client</option>
-									<option th:each="clients : ${listClients}" th:value="${clients.id}" th:text="${clients.clientName}" th:selected="${clients.id} == *{clients.id}"></option>	 
+									<option th:each="clients : ${listClients}" th:value="${clients.id}" th:text="${clients.clientName}" th:selected="${clients.id} == *{client}"></option>	 
 								</select>												
-		                            <div class="alert alert-danger" th:if="${#fields.hasErrors('client')}" th:errors="client"></div>
+		                            <div class="alert alert-danger" th:if="${#fields.hasErrors('client')}" th:errors="*{client}"></div>
+		                        </div>
+		                    </div>
+		                                             
+		                     <div class="col-md-2">
+	                            <div class="form-group">
+		                            <label class="mx-0" style="font-weight:bold;">Pay Boxes</label>
+								<select id="payBox_Id" name="payBoxId" th:field="*{payBox}" class="form-control col-xs-12 mb-3"  required />
+									<option th:value="''" >Select Pay-Box</option>
+									<option th:each="payBoxes : ${listPayBoxes}" th:value="${payBoxes.id}" th:text="${payBoxes.name}" th:selected="${payBoxes.id} == *{payBox}"></option>	 
+								</select>												
+		                            <div class="alert alert-danger" th:if="${#fields.hasErrors('payBox')}" th:errors="*{payBox}"></div>
 		                        </div>
 		                    </div>
 		                 
@@ -63,7 +92,7 @@
                          	<div class="col-md-3">
                                 <div class="form-group">
                                     <label for="amountPaid">Amount Paid</label>
-                                    <input class="form-control" type="text" th:field="*{amountPaid}" id="amountPaid" placeholder="0" />
+                                    <input class="input form-control text-center" type="text" th:field="*{amountPaid}" id="amountPaid" placeholder="0" />
                                     <div class="alert alert-danger" th:if="${#fields.hasErrors('amountPaid')}" th:errors="*{amountPaid}"></div>
                                 </div>
                             </div>
@@ -112,6 +141,13 @@
 			      });
 			    });
             </script>
+            
+            <script type="text/javascript" th:replace="../static/payment_Info.js" th:src="@{/payment_Info.js}"></script>
+            
+			<script>
+			  var today = new Date().toISOString().substr(0, 10);			  
+			  document.getElementById("paymentDate").value = today;
+			</script>
                       	
         </div>
         

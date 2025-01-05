@@ -33,21 +33,34 @@
                     <input type="hidden" th:field="*{id}" />
                     <div class="card-body">  
                         <div class="row">
-		                	<div class="col-sm-3">    	
+		                	<div class="col-sm-2">    	
 		                        <div class="form-group">
 		                            <label for="registrationNo">Registration Number</label>
 		                            <input class="form-control" type="text" th:field="*{registrationNo}" id="registrationNo" placeholder="Enter Truck Registration" />
 		                            <div class="alert alert-danger" th:if="${#fields.hasErrors('registrationNo')}" th:errors="*{registrationNo}"></div>
 		                        </div>
 		                     </div>
-		                	<div class="col-sm-3"> 
+		                	<div class="col-sm-2"> 
 		                        <div class="form-group">
 		                            <label for="capacity">Capacity</label>
 		                            <input class="form-control" type="text" th:field="*{capacity}" id="capacity" placeholder="Enter Trucks Capacity" />
 		                            <div class="alert alert-danger" th:if="${#fields.hasErrors('capacity')}" th:errors="*{capacity}"></div>
 		                        </div>
 		                     </div>
-		                	
+		                		   
+                            <div class="col-sm-2"> 
+		                        <div class="form-group">		                            
+		                            <label class="mx-0" style="font-weight:bold;">Status</label> 
+									<select id="status" name="status" th:field="*{status}" class="form-control col-xs-12 mb-2"  required>
+										<option th:value="''" >Select Status</option>
+										<option th:value="ACTIVE" th:text="ACTIVE" th:selected="ACTIVE == *{status}"></option>
+					        			<option th:value="DORMANT" th:text="DORMANT" th:selected="DORMANT == *{status}"></option>	 
+					        			<option th:value="ARCHIVED" th:text="ARCHIVED" th:selected="ARCHIVED == *{status}"></option>	 
+									</select>		                            
+		                            <div class="alert alert-danger" th:if="${#fields.hasErrors('status')}" th:errors="*{status}"></div>
+		                        </div>
+		                     </div>
+		                        
 		                     <div class="col-md-3">
 	                            <div class="form-group">
 		                            <label class="mx-0" style="font-weight:bold;">Staffs</label>

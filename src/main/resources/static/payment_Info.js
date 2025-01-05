@@ -11,7 +11,7 @@
 			 <script>
 			 	$(document).ready(function() {												
 						// GET REQUEST
-						$("#house_Id").change(function(event) {
+						$("#client_Id").change(function(event) {
 						
 							event.preventDefault();
 							ajaxGet();
@@ -20,14 +20,14 @@
 						// DO GET
 						function ajaxGet() {
 						
-						 let cid = $('#house_Id').val();
+						 let cid = $('#client_Id').val();
 						 let data = {                        
 									 id: cid
 								    };
 								    
 							$.ajax({
 								type : "GET",
-								url : "/getBillingById/",
+								url : "/getTransportationById/",
 								data: data,
 								success : function(result) {
 									if (result.status == "success") {
@@ -56,10 +56,8 @@
 										
 												
 											var totalAmountPaid = result.data.totalAmountPaid;
-											var totalRentInvoices = result.data.totalRentInvoices;	
-											var totalWaterInvoices = result.data.totalWaterInvoices;	
-											var totalTrashInvoices = result.data.totalTrashInvoices;
-											var totalBalanceBf = totalAmountPaid - totalRentInvoices - totalWaterInvoices - totalTrashInvoices;															
+											var totalTransportInvoices = result.data.totalInvoices;
+											var totalBalanceBf = totalAmountPaid - totalTransportInvoices;															
 											var client = ""+result.data.clientName;
 											
 										/*	
@@ -110,7 +108,7 @@
 			 <script type="text/javascript">  			 
 				$(function(){
 				    $("#btnReset").click(function(){
-				        $("#house_Id").select2('val', 0);				        				
+				        $("#client_Id").select2('val', 0);				        				
 						document.getElementById('balanceCf_Id').style.color = 'black';
 						document.getElementById('balanceCf_Id').style.backgroundColor = 'white';
 						$('#paidBy').val("enter paid by");

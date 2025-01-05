@@ -7,6 +7,8 @@ import org.springframework.data.domain.Pageable;
 
 import com.cradletechnologies.transportation.model.ClientsList_Report;
 import com.cradletechnologies.transportation.model.PaymentBilling;
+import com.cradletechnologies.transportation.model.Transportation;
+import com.cradletechnologies.transportation.model.Transportations;
 
 public interface PaymentBillingService {
 
@@ -15,6 +17,10 @@ public interface PaymentBillingService {
 	void fillPaymentsToPaymentBilling();
 	
 	void fillBillingToPaymentBilling();
+		
+	void fillCashInToPaymentBilling();
+	
+	void fillCashOutToPaymentBilling();
 	
 	List<PaymentBilling> listPaymentBilling();
 	
@@ -33,5 +39,7 @@ public interface PaymentBillingService {
 	Page<PaymentBilling> getPaymentBillingForDatatable(String queryString, Pageable pageable);
 	
 	Page<ClientsList_Report> getClientsListForDatatable(String queryString, Pageable pageable);
+
+	Transportation findPaymentBilling(String id);
 	
 }

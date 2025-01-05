@@ -102,6 +102,18 @@
                           </ul>
                             
                          <ul class="nav nav-treeview">
+                              <li class="nav-item">
+                                  <a href="#" th:href="@{/expenses/index}" class="nav-link">
+                                      <i class="far fa-circle nav-icon"></i>
+                                      <p>
+                                          Expenses
+                                          <i class="right fas fa-angle-left"></i>
+                                      </p>
+                                 	</a>
+                            </li>
+                          </ul>
+                            
+                         <ul class="nav nav-treeview">
                              <li class="nav-item">
                                  <a href="#" th:href="@{/paymentBilling/index}" class="nav-link">
                                      <i class="far fa-circle nav-icon"></i>
@@ -112,24 +124,36 @@
                                  </a>
                              </li>
                          </ul>
+                            
+                         <ul class="nav nav-treeview">
+                             <li class="nav-item">
+                                 <a href="#" th:href="@{/transportExpenses/index}" class="nav-link">
+                                     <i class="far fa-circle nav-icon"></i>
+                                     <p>
+                                         Transport - Expenses
+                                         <i class="right fas fa-angle-left"></i>
+                                     </p>
+                                 </a>
+                             </li>
+                         </ul>
                          <ul class="nav nav-treeview">
                              <li class="nav-item">
                                  <a href="#" class="nav-link">
                                      <i class="far fa-circle nav-icon"></i>
                                      <p>
-                                         Clients Reports
+                                         Trucks Reports
                                          <i class="right fas fa-angle-left"></i>
                                      </p>
                                  </a>
                                   <ul class="nav nav-treeview">
                                       <li class="nav-item">
-                                          <a href="#" th:href="@{/reports/index}" class="nav-link">
+                                          <a href="#" th:href="@{/reports/trucks}" class="nav-link">
                                               <i class="far fa-plus-square nav-icon"></i>
-                                              <p>Statements</p>
+                                              <p>Truck Performance</p>
                                           </a>
                                       </li>
                                       <li class="nav-item">
-                                          <a href="#" th:href="@{/payments/index}" class="nav-link">
+                                          <a href="#" th:href="@{/reports/index}" class="nav-link">
                                               <i class="far fa-list-alt nav-icon"></i>
                                               <p>Other Reports</p>
                                           </a>
@@ -280,9 +304,10 @@
                       </li>
                       
                     
-                       <li class="nav-item menu-open">
+                       <!-- li class="nav-item menu-open"-->
+                       <li class="nav-item">
                           <a href="#" class="nav-link active">
-                              <i class="nav-icon fas fas fa-map-marker"></i>
+                              <i class="nav-icon fas fas fa-tools"></i>
                               <p>
                                   App Helpers
                                   <i class="right fas fa-angle-left"></i>
@@ -295,6 +320,18 @@
                                       <i class="far fa-circle nav-icon"></i>
                                       <p>
                                           Locations
+                                          <i class="right fas fa-angle-left"></i>
+                                      </p>
+                                  </a>                                        
+                              </li>
+                          </ul>
+                          
+                          <ul class="nav nav-treeview">
+                              <li class="nav-item">
+                                  <a href="#" th:href="@{/payBoxes/index}" class="nav-link">
+                                      <i class="far fa-circle nav-icon"></i>
+                                      <p>
+                                          PayBoxes
                                           <i class="right fas fa-angle-left"></i>
                                       </p>
                                   </a>                                        
@@ -318,5 +355,22 @@
                 </div>
             </aside>
         </div>
+        
+        <div layout:fragment="page_specific_scripts">
+        <script>
+			$(document).ready(function() {
+			    // Close all other menus when one is opened
+			    $('.nav-item').on('click', function() {
+			        $('.nav-item.menu-open').not(this).removeClass('menu-is-opening menu-open');
+			        $('.nav-item.menu-open').not(this).find('.nav-link.active').removeClass('active');
+			        $('.nav-treeview').not($(this).find('.nav-treeview')).slideUp();
+			    });
+			
+			    // Initially open the active menu
+			    $('.nav-link.active').closest('.nav-item').addClass('menu-is-opening menu-open');
+			});
+			</script>
+        </div>
+        
     </body>
 </html>

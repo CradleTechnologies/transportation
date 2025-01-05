@@ -33,6 +33,7 @@
                                 <th>Registration</th>
                                 <th>Capacity</th>
                                 <th>Driver</th>
+                                <th>Status</th>
                                 <th>Picture</th>
                                 <th class="col-4">Action</th>
                             </tr>
@@ -61,7 +62,17 @@
                         	},
                             {
                                 "data": "driversName",
-                            },                            
+                            }, 
+                            {"data": "status",
+                            	"render": function(data, type, row){
+                            		if(data === "ACTIVE"){
+                            		return "ACTIVE";
+	                            	} 
+	                            	else {
+	                            		return "INACTIVE";
+	                            	}
+                            	}
+                            },  
                             { "data": "truckPicture",
                                 "render": function (data, type, row, meta){
 						                if(type === "display"){

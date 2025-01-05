@@ -14,6 +14,8 @@ public class TrucksDTO {
 	   
 	    private Double capacity;
 	    
+	    private String status;
+	    
 	    private String description;   	
 	    
 	    private String truckPicture;	    
@@ -26,23 +28,25 @@ public class TrucksDTO {
 
 		}
 				
-		public TrucksDTO(int id, String registrationNo, Double capacity, String description, String truckPicture,
+		public TrucksDTO(int id, String registrationNo, Double capacity, String status, String description, String truckPicture,
 				Staffs staff, Companies company) {
 			super();
 			this.id = id;
 			this.registrationNo = registrationNo;
 			this.capacity = capacity;
+			this.status = status;
 			this.description = description;
 			this.truckPicture = truckPicture;
 			this.staff = staff;
 			this.company = company;
 		}
 
-		public TrucksDTO(String registrationNo, Double capacity, String description, String truckPicture, Staffs staff,
+		public TrucksDTO(String registrationNo, Double capacity, String status, String description, String truckPicture, Staffs staff,
 				Companies company) {
 			super();
 			this.registrationNo = registrationNo;
 			this.capacity = capacity;
+			this.status = status;
 			this.description = description;
 			this.truckPicture = truckPicture;
 			this.staff = staff;
@@ -71,6 +75,14 @@ public class TrucksDTO {
 
 		public void setCapacity(Double capacity) {
 			this.capacity = capacity;
+		}
+
+		public String getStatus() {
+			return status;
+		}
+
+		public void setStatus(String status) {
+			this.status = status;
 		}
 
 		public String getDescription() {

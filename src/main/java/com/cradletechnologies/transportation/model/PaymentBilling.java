@@ -34,20 +34,20 @@ public class PaymentBilling implements Serializable{
 	@Column(name = "record_date", nullable = false, length = 200)
 	private Date recordDate;
 	
-//	@Column(name = "client_id", nullable = false, length = 200)
-	@JoinColumn(name = "client_id", referencedColumnName = "id", nullable = false)
-    @ManyToOne(optional = false)
-	private Clients clientId;
+	@Column(name = "client_id", nullable = false, length = 200)
+	private int clientId;
 	
-//	@Column(name = "payment_id", nullable = false, length = 200)
-	@JoinColumn(name = "payment_id", referencedColumnName = "id", nullable = false)
-    @ManyToOne(optional = false)
-	private Payments paymentId;
+	@Column(name = "payment_id", nullable = false, length = 200)
+	private int paymentId;
 	
-//	@Column(name = "transportation_id", nullable = false, length = 200)
-	@JoinColumn(name = "transportation_id", referencedColumnName = "id", nullable = false)
-    @ManyToOne(optional = false)
-	private Transportations transportationId;
+	@Column(name = "transportation_id", nullable = false, length = 200)
+	private int transportationId;
+	
+	@Column(name = "cash_in_id", nullable = false, length = 200)
+	private int cashInId;
+	
+	@Column(name = "cash_out_id", nullable = false, length = 200)
+	private int cashOutId;
 	
 	@Column(name = "amount", nullable = false, length = 200)
 	private double amount;
@@ -57,90 +57,95 @@ public class PaymentBilling implements Serializable{
 	public PaymentBilling() {
 		
 	}
-
-
-	public PaymentBilling(int id, Date recordDate, Clients clientId, Payments paymentId,
-			Transportations transportationId, double amount) {
+	
+	public PaymentBilling(int id, Date recordDate, int clientId, int paymentId, int transportationId, int cashInId,
+			int cashOutId, double amount) {
 		super();
 		this.id = id;
 		this.recordDate = recordDate;
 		this.clientId = clientId;
 		this.paymentId = paymentId;
 		this.transportationId = transportationId;
+		this.cashInId = cashInId;
+		this.cashOutId = cashOutId;
 		this.amount = amount;
 	}
-
-
-	public PaymentBilling(Date recordDate, Clients clientId, Payments paymentId, Transportations transportationId,
-			double amount) {
+	
+	public PaymentBilling(Date recordDate, int clientId, int paymentId, int transportationId, int cashInId, 
+			int cashOutId, double amount) {
 		super();
 		this.recordDate = recordDate;
 		this.clientId = clientId;
 		this.paymentId = paymentId;
 		this.transportationId = transportationId;
+		this.cashInId = cashInId;
+		this.cashOutId = cashOutId;
 		this.amount = amount;
 	}
-
-
+	
 	public int getId() {
 		return id;
 	}
-
 
 	public void setId(int id) {
 		this.id = id;
 	}
 
-
 	public Date getRecordDate() {
 		return recordDate;
 	}
-
 
 	public void setRecordDate(Date recordDate) {
 		this.recordDate = recordDate;
 	}
 
-
-	public Clients getClientId() {
+	public int getClientId() {
 		return clientId;
 	}
 
-
-	public void setClientId(Clients clientId) {
+	public void setClientId(int clientId) {
 		this.clientId = clientId;
 	}
 
-
-	public Payments getPaymentId() {
+	public int getPaymentId() {
 		return paymentId;
 	}
 
-
-	public void setPaymentId(Payments paymentId) {
+	public void setPaymentId(int paymentId) {
 		this.paymentId = paymentId;
 	}
 
-
-	public Transportations getTransportationId() {
+	public int getTransportationId() {
 		return transportationId;
 	}
 
-
-	public void setTransportationId(Transportations transportationId) {
+	public void setTransportationId(int transportationId) {
 		this.transportationId = transportationId;
 	}
 
+	public int getCashInId() {
+		return cashInId;
+	}
+
+	public void setCashInId(int cashInId) {
+		this.cashInId = cashInId;
+	}
+
+	public int getCashOutId() {
+		return cashOutId;
+	}
+
+	public void setCashOutId(int cashOutId) {
+		this.cashOutId = cashOutId;
+	}
 
 	public double getAmount() {
 		return amount;
 	}
 
-
 	public void setAmount(double amount) {
 		this.amount = amount;
 	}
-
 
 	@Override
 	public String toString() {

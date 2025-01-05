@@ -34,7 +34,7 @@
                                 <th>Client</th>
                                 <th>Truck</th>
                                 <th>Amount</th>
-                                <th>Status</th>
+                                <th>Destination</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -52,20 +52,18 @@
                         "serverSide": true,
                         "columns": [
                             {"data": "id"},
-                            {"data": "transportDate"},
-                            {"data": "clientName"},
+                            {
+ 		                       data: "transportDate", 
+ 									"render":function(data){
+ 						      return moment(data).format('MMMM Do YYYY'); 
+ 						    },
+ 		                        "width": "15%",
+ 		                    },
+                            {"data": "client"},
                             {"data": "truck"},
-                            {"data": "amount"},
-                            {"data": "status",
-                            	"render": function(data, type, row){
-                            		if(data === "ACTIVE"){
-                            		return "ACTIVE";
-	                            	} 
-	                            	else {
-	                            		return "INACTIVE";
-	                            	}
-                            	}
-                            },                                                        
+                            {"data": "transportCharges"},
+                            {"data": "areaName"},
+                                                                                   
                             
                             {
                                 "render": function (data, type, row, meta) {

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" 
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layouts/main_layout}">
+    <head>
+        <title>Update Expense</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    </head>
+    <body>
+        <div layout:fragment="breadcrumb">
+            <div class="col-sm-6">
+                <h1>Expenses</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a th:href="@{/expenses/index}" >Expenses</a></li>
+                    <li class="breadcrumb-item active">Update Expense</li>
+                </ol>
+            </div>
+        </div>
+        <div  layout:fragment="content">
+            <div class="card card-info">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-plus"></i>
+                        Update Expenses
+                    </h3>
+                </div>
+                                   
+                <form th:action="@{/expenses/update/{id}(id=${expensesdto.id})}" th:object="${expensesdto}" method="POST" enctype="multipart/form-data">
+                    <input type="hidden" th:field="*{id}" />
+                    <div class="card-body">  
+                        <div class="row"> 
+                             <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="expenseDate">Expense Date</label>
+                                    <input class="form-control" type="date" th:field="*{expenseDate}" id="expenseDate" placeholder="enter expense date" />
+                                    <div class="alert alert-danger" th:if="${#fields.hasErrors('expenseDate')}" th:errors="*{expenseDate}"></div>
+                                </div>
+                            </div> 
+                            
+		                       <div class="col-md-2">
+	                            <div class="form-group">
+		                            <label class="mx-0" style="font-weight:bold;">Truck</label>
+								<select id="truck_Id" name="truckId" th:field="*{truck}" class="form-control col-xs-12 mb-3"  required />
+									<option th:value="''" >Select Truck</option>
+									<option th:each="trucks : ${listTrucks}" th:value="${trucks.id}" th:text="${trucks.registrationNo}" th:selected="${trucks.id} == *{truck}"></option>	 
+								</select>												
+		                            <div class="alert alert-danger" th:if="${#fields.hasErrors('truck')}" th:errors="*{truck}"></div>
+		                        </div>
+		                    </div>
+		                                             
+		                     <div class="col-md-2">
+	                            <div class="form-group">
+		                            <label class="mx-0" style="font-weight:bold;">Pay Boxes</label>
+								<select id="payBox_Id" name="payBoxId" th:field="*{payBox}" class="form-control col-xs-12 mb-3"  required />
+									<option th:value="''" >Select Pay-Box</option>
+									<option th:each="payBoxes : ${listPayBoxes}" th:value="${payBoxes.id}" th:text="${payBoxes.name}" th:selected="${payBoxes.id} == *{payBox}"></option>	 
+								</select>												
+		                            <div class="alert alert-danger" th:if="${#fields.hasErrors('payBox')}" th:errors="*{payBox}"></div>
+		                        </div>
+		                    </div>
+		                 
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="paidFor">Paid For</label>
+                                    <input class="form-control" type="text" th:field="*{paidFor}" id="paidFor" placeholder="enter narration" />
+                                    <div class="alert alert-danger" th:if="${#fields.hasErrors('paidFor')}" th:errors="*{paidFor}"></div>
+                                </div>
+                            </div>
+                         
+                         	<div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="amountPaid">Amount Paid</label>
+                                    <input class="input form-control text-center" type="text" th:field="*{amountPaid}" id="amountPaid" placeholder="0" />
+                                    <div class="alert alert-danger" th:if="${#fields.hasErrors('amountPaid')}" th:errors="*{amountPaid}"></div>
+                                </div>
+                            </div>
+                            
+                            
+                            <div class="col-md-6">                            
+                                <div class="form-group">
+                                    <label for="expenseProof">Proof of Expense</label>
+                                    <input class="form-control" type="file" th:field="*{expenseProof}" id="expenseProof" placeholder="upload a proof of expense" required accept="image/png, image/jpeg" />
+                                    <div class="alert alert-danger" th:if="${#fields.hasErrors('expenseProof')}" th:errors="*{expenseProof}"></div>
+                                </div>
+                            </div>
+                                                        
+                            <div class="col-md-6">                            
+                                <div class="form-group">
+                                    <p class="card" style="height:200px; overflow:scroll;">
+										<img class="text-center my-auto" id="thumbnail" th:src="@{*{getExpenseProofPath}}" style="width:100%;" alt="proof_of_expense" />																	      
+									</p>
+                                </div>
+                            </div>
+		                 
+                        </div>                    
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-success">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <div layout:fragment="page_specific_scripts">
+            
+            <script type="text/javascript">
+                $(document).ready(()=>{
+			      $('#expenseProof').change(function(){
+			        const file = this.files[0];
+			        console.log(file);
+			        if (file){
+			          let reader = new FileReader();
+			          reader.onload = function(event){
+			            console.log(event.target.result);
+			            $('#thumbnail').attr('src', event.target.result);
+			          }
+			          reader.readAsDataURL(file);
+			        }
+			      });
+			    });
+            </script>
+            
+            <script type="text/javascript" th:replace="../static/expense_Info.js" th:src="@{/expense_Info.js}"></script>
+            
+			<script>
+			  var today = new Date().toISOString().substr(0, 10);			  
+			  document.getElementById("expenseDate").value = today;
+			</script>
+                      	
+        </div>
+        
+    </body>
+</html>
+

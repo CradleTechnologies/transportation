@@ -1,6 +1,6 @@
 package com.cradletechnologies.transportation.dto;
 
-import java.util.Date;
+import java.sql.Date;
 
 import com.cradletechnologies.transportation.model.Areas;
 import com.cradletechnologies.transportation.model.Clients;

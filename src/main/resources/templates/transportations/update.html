@@ -29,54 +29,36 @@
                         New Transportations
                     </h3>
                 </div>
-                <form th:action="@{/transportations/update/{id}(id=${transportationsDTO.id})}" th:object="${transportationsDTO}" method="POST" enctype="multipart/form-data">
+                <form th:action="@{/transportations/update/{id}(id=${transportationdto.id})}" th:object="${transportationdto}" method="POST" enctype="multipart/form-data">
                     <input type="hidden" th:field="*{id}" />
                     <div class="card-body">  
                         <div class="row"> 
                             <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="firstName">First Name</label>
-                                    <input class="form-control" type="text" th:field="*{firstName}" id="firstName" placeholder="enter first name" />
-                                    <div class="alert alert-danger" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></div>
+                                 <div class="form-group">
+                                    <label for="transportDate">Transport Date</label>
+                                    <input class="form-control" type="date" th:field="*{transportDate}" id="transportDate" placeholder="choose transportation date" />
+                                    <div class="alert alert-danger" th:if="${#fields.hasErrors('transportDate')}" th:errors="*{transportDate}"></div>
+                                </div>
+                            </div> 
+                            <div class="col-md-4">
+                                 <div class="form-group">
+                                    <label for="offLoadingDate">Off-loading Date</label>
+                                    <input class="form-control" type="date" th:field="*{offLoadingDate}" id="offLoadingDate" placeholder="expected offloading date" />
+                                    <div class="alert alert-danger" th:if="${#fields.hasErrors('offLoadingDate')}" th:errors="*{offLoadingDate}"></div>
                                 </div>
                             </div> 
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="lastName">Last Name</label>
-                                    <input class="form-control" type="text" th:field="*{lastName}" id="lastName" placeholder="enter last name" />
-                                    <div class="alert alert-danger" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></div>
+                                    <label for="transportCharges">Transport Charges</label>
+                                    <input class="form-control text-center" type="text" th:field="*{transportCharges}" id="transportCharges" placeholder="0" required />
+                                    <div class="alert alert-danger" th:if="${#fields.hasErrors('transportCharges')}" th:errors="*{transportCharges}"></div>
                                 </div>
                             </div>
-                         
-                         	<div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="transportationame">Transportation Name</label>
-                                    <input class="form-control" type="text" th:field="*{transportationName}" id="transportationName" placeholder="enter transportation name" />
-                                    <div class="alert alert-danger" th:if="${#fields.hasErrors('transportationName')}" th:errors="*{transportationName}"></div>
-                                </div>
-                            </div>
-                            
-                            
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="emailAddress">Email Address</label>
-                                    <input class="form-control" type="text" th:field="*{emailAddress}" id="emailAddress" placeholder="enter email" />
-                                    <div class="alert alert-danger" th:if="${#fields.hasErrors('emailAddress')}" th:errors="*{emailAddress}"></div>
-                                </div>
-                            </div>
-                            
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="telNo">Telephone No.</label>
-                                    <input class="form-control" type="text" th:field="*{telNo}" id="telNo" placeholder="enter telephone number" />
-                                    <div class="alert alert-danger" th:if="${#fields.hasErrors('telNo')}" th:errors="*{telNo}"></div>
-                                </div>
-                            </div>
-		                      
+                                                	
                             <div class="col-sm-3"> 
 		                        <div class="form-group">		                            
 		                            <label class="mx-0" style="font-weight:bold;">Status</label> 
-									<select id="status" name="status" th:field="*{status}" class="form-control col-xs-12 mb-2"  required="true" />
+									<select id="status" name="status" th:field="*{status}" class="form-control col-xs-12 mb-2"  required >
 										<option th:value="''" >Select Status</option>
 										<option th:value="ACTIVE" th:text="ACTIVE" th:selected="ACTIVE == *{status}"></option>
 					        			<option th:value="DORMANT" th:text="DORMANT" th:selected="DORMANT == *{status}"></option>	 
@@ -87,23 +69,44 @@
 		                                                 
 		                     <div class="col-md-3">
 	                            <div class="form-group">
+		                            <label class="mx-0" style="font-weight:bold;">Truck</label> 
+									<select id="truck_Id" name="truckId" th:field="*{truck}" class="form-control col-xs-12 mb-3"  required >
+										<option th:value="''" >Select Truck</option>
+										<option th:each="trucks : ${listTrucks}" th:value="${trucks.id}" th:text="${trucks.registrationNo}" th:selected="${trucks.id} == *{truck.id}"></option>	 
+									</select>	
+		                            <div class="alert alert-danger" th:if="${#fields.hasErrors('truck')}" th:errors="*{truck}"></div>
+		                        </div>
+		                    </div>
+		                                                 
+		                     <div class="col-md-3">
+	                            <div class="form-group">
 		                            <label class="mx-0" style="font-weight:bold;">Area</label> 
-									<select id="area_Id" name="areaId" th:field="*{area}" class="form-control col-xs-12 mb-3"  required="true" />
+									<select id="area_Id" name="areaId" th:field="*{area}" class="form-control col-xs-12 mb-3"  required >
 										<option th:value="''" >Select Area</option>
 										<option th:each="areas : ${listAreas}" th:value="${areas.id}" th:text="${areas.areaName}" th:selected="${areas.id} == *{area.id}"></option>	 
 									</select>	
 		                            <div class="alert alert-danger" th:if="${#fields.hasErrors('area')}" th:errors="*{area}"></div>
 		                        </div>
 		                    </div>
-		                      
-                            <div class="col-md-12">
+		                                                 
+		                     <div class="col-md-3">
 	                            <div class="form-group">
-		                            <label for="remarks">Remarks</label>
-		                            <textarea rows="6" cols="120" class="form-control" type="text" th:field="*{remarks}" name="remarks" id="remarks" placeholder="Optional remarks" />
-		                            <div class="alert alert-danger" th:if="${#fields.hasErrors('remarks')}" th:errors="*{remarks}"></div>
+		                            <label class="mx-0" style="font-weight:bold;">Client</label> 
+									<select id="client_Id" name="clientId" th:field="*{client}" class="form-control col-xs-12 mb-3"  required >
+										<option th:value="''" >Select Client</option>
+										<option th:each="clients : ${listClients}" th:value="${clients.id}" th:text="${clients.clientName}" th:selected="${clients.id} == *{client.id}"></option>	 
+									</select>	
+		                            <div class="alert alert-danger" th:if="${#fields.hasErrors('client')}" th:errors="*{client}"></div>
 		                        </div>
 		                    </div>
-		                      
+		                    
+                            <div class="col-md-12">
+	                            	<div class="form-group">
+		                            	<label for="transportDetails">Transport Details</label>
+		                            	<textarea rows="6" cols="120" class="form-control" type="text" th:field="*{transportDetails}" id="transportDetails" placeholder="Required Transport Details"></textarea>
+		                            	<div class="alert alert-danger" th:if="${#fields.hasErrors('transportDetails')}" th:errors="*{transportDetails}"></div>
+		                        	</div>
+		                    	</div>
                         </div>                    
                     </div>
                     <div class="card-footer">

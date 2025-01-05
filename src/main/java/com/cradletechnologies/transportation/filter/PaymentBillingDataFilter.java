@@ -26,6 +26,8 @@ public class PaymentBillingDataFilter implements Specification<PaymentBilling> {
             predicates.add(criteriaBuilder.like(root.get("clients").get("clientName"), '%' + userQuery + '%'));
             predicates.add(criteriaBuilder.like(root.get("paymentId"), '%' + userQuery + '%'));
             predicates.add(criteriaBuilder.like(root.get("transportationId"), '%' + userQuery + '%'));
+            predicates.add(criteriaBuilder.like(root.get("cashInId"), '%' + userQuery + '%'));
+            predicates.add(criteriaBuilder.like(root.get("cashOutId"), '%' + userQuery + '%'));
         }
         return (!predicates.isEmpty() ? criteriaBuilder.or(predicates.toArray(new Predicate[predicates.size()])) : null);
     }

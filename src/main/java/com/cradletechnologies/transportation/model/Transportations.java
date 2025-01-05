@@ -1,7 +1,7 @@
 package com.cradletechnologies.transportation.model;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;

@@ -1,6 +1,6 @@
 package com.cradletechnologies.transportation.dto;
 
-import java.util.Date;
+import java.sql.Date;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Transient;
@@ -21,6 +21,8 @@ public class PaymentsDTO {
     private int client;
 
     private int payBox;
+    
+    private int balanceCf;
 
 	
 
@@ -55,6 +57,19 @@ public class PaymentsDTO {
 		this.payBox = payBox;
 	}
 
+
+
+	public PaymentsDTO(Date paymentDate, Double amountPaid, String paidBy, String paymentProof, int client, int payBox,
+			int balanceCf) {
+		super();
+		this.paymentDate = paymentDate;
+		this.amountPaid = amountPaid;
+		this.paidBy = paidBy;
+		this.paymentProof = paymentProof;
+		this.client = client;
+		this.payBox = payBox;
+		this.balanceCf = balanceCf;
+	}
 
 
 
@@ -138,6 +153,18 @@ public class PaymentsDTO {
 
 	public void setPayBox(int payBox) {
 		this.payBox = payBox;
+	}
+
+
+
+	public int getBalanceCf() {
+		return balanceCf;
+	}
+
+
+
+	public void setBalanceCf(int balanceCf) {
+		this.balanceCf = balanceCf;
 	}
 
 

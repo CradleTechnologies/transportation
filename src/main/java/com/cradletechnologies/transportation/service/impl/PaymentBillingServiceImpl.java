@@ -12,6 +12,7 @@ import com.cradletechnologies.transportation.filter.ClientsReportDataFilter;
 import com.cradletechnologies.transportation.filter.PaymentBillingDataFilter;
 import com.cradletechnologies.transportation.model.ClientsList_Report;
 import com.cradletechnologies.transportation.model.PaymentBilling;
+import com.cradletechnologies.transportation.model.Transportation;
 import com.cradletechnologies.transportation.repository.PaymentBillingRepository;
 import com.cradletechnologies.transportation.service.PaymentBillingService;
 
@@ -43,6 +44,20 @@ public class PaymentBillingServiceImpl implements PaymentBillingService{
 	@Override
 	public void fillBillingToPaymentBilling() {
 		paymentBillingRepository.fillPaymentBilling_Billing();
+		
+	}
+		
+	@Transactional
+	@Override
+	public void fillCashInToPaymentBilling() {
+		paymentBillingRepository.fillPaymentBilling_CashIn();
+		
+	}
+	
+	@Transactional
+	@Override
+	public void fillCashOutToPaymentBilling() {
+		paymentBillingRepository.fillPaymentBilling_CashOut();
 		
 	}
 	
@@ -81,6 +96,13 @@ public class PaymentBillingServiceImpl implements PaymentBillingService{
 		return paymentBillingRepository.getClientReport(clientId);
 	}
 
+
+	@Override
+	public Transportation findPaymentBilling(String id) {
+		return paymentBillingRepository.findPaymentBilling(id);
+	}
+
+	
 	@Override
 	public Page<PaymentBilling> getPaymentBillingForDatatable(String queryString, Pageable pageable) {
 		PaymentBillingDataFilter paymentBillingDataFilter = new PaymentBillingDataFilter(queryString);
@@ -92,6 +114,7 @@ public class PaymentBillingServiceImpl implements PaymentBillingService{
 		ClientsReportDataFilter clientsReportDataFilter = new ClientsReportDataFilter(queryString);
 		return paymentBillingRepository.getClientsReportForDatatable(clientsReportDataFilter, pageable);
 	}
+
 
 
 }

@@ -57,7 +57,7 @@
                             <div class="col-sm-3"> 
 		                        <div class="form-group">		                            
 		                            <label class="mx-0" style="font-weight:bold;">Status</label> 
-									<select id="status" name="status" th:field="*{status}" class="form-control col-xs-12 mb-2"  required="true" />
+									<select id="status" name="status" th:field="*{status}" class="form-control col-xs-12 mb-2"  required >
 										<option th:value="''" >Select Status</option>
 										<option th:value="ACTIVE" th:text="ACTIVE" th:selected="ACTIVE == *{status}"></option>
 					        			<option th:value="DORMANT" th:text="DORMANT" th:selected="DORMANT == *{status}"></option>	 
@@ -69,7 +69,7 @@
 		                     <div class="col-md-3">
 	                            <div class="form-group">
 		                            <label class="mx-0" style="font-weight:bold;">Truck</label> 
-									<select id="truck_Id" name="truckId" th:field="*{truck}" class="form-control col-xs-12 mb-3"  required="true" />
+									<select id="truck_Id" name="truckId" th:field="*{truck}" class="form-control col-xs-12 mb-3"  required >
 										<option th:value="''" >Select Truck</option>
 										<option th:each="trucks : ${listTrucks}" th:value="${trucks.id}" th:text="${trucks.registrationNo}" th:selected="${trucks.id} == *{truck}"></option>	 
 									</select>	
@@ -80,7 +80,7 @@
 		                     <div class="col-md-3">
 	                            <div class="form-group">
 		                            <label class="mx-0" style="font-weight:bold;">Area</label> 
-									<select id="area_Id" name="areaId" th:field="*{area}" class="form-control col-xs-12 mb-3"  required="true" />
+									<select id="area_Id" name="areaId" th:field="*{area}" class="form-control col-xs-12 mb-3"  required >
 										<option th:value="''" >Select Area</option>
 										<option th:each="areas : ${listAreas}" th:value="${areas.id}" th:text="${areas.areaName}" th:selected="${areas.id} == *{area}"></option>	 
 									</select>	
@@ -91,7 +91,7 @@
 		                     <div class="col-md-3">
 	                            <div class="form-group">
 		                            <label class="mx-0" style="font-weight:bold;">Client</label> 
-									<select id="client_Id" name="clientId" th:field="*{client}" class="form-control col-xs-12 mb-3"  required="true" />
+									<select id="client_Id" name="clientId" th:field="*{client}" class="form-control col-xs-12 mb-3"  required >
 										<option th:value="''" >Select Client</option>
 										<option th:each="clients : ${listClients}" th:value="${clients.id}" th:text="${clients.clientName}" th:selected="${clients.id} == *{client}"></option>	 
 									</select>	
@@ -102,7 +102,7 @@
                             <div class="col-md-12">
 	                            	<div class="form-group">
 		                            	<label for="transportDetails">Transport Details</label>
-		                            	<textarea rows="6" cols="120" class="form-control" type="text" th:field="*{transportDetails}" id="transportDetails" placeholder="Required Transport Details" />
+		                            	<textarea rows="6" cols="120" class="form-control" type="text" th:field="*{transportDetails}" id="transportDetails" placeholder="Required Transport Details"></textarea>
 		                            	<div class="alert alert-danger" th:if="${#fields.hasErrors('transportDetails')}" th:errors="*{transportDetails}"></div>
 		                        	</div>
 		                    	</div>

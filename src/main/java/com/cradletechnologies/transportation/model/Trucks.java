@@ -49,6 +49,11 @@ public class Trucks implements Serializable {
 	    
 	    @Basic(optional = false)
 	    @NotNull
+	    @Column(name = "status", nullable = false)
+	    private String status;
+	    
+	    @Basic(optional = false)
+	    @NotNull
 	    @Column(name = "description", nullable = false, length=1000)
 	    private String description;
 
@@ -75,11 +80,12 @@ public class Trucks implements Serializable {
 		}
 
 		public Trucks(int id, @NotNull @Size(min = 1, max = 400) String registrationNo, @NotNull Double capacity,
-				@NotNull String description, String truckPicture, Staffs staff, Companies company) {
+				@NotNull String status, @NotNull String description, String truckPicture, Staffs staff, Companies company) {
 			super();
 			this.id = id;
 			this.registrationNo = registrationNo;
 			this.capacity = capacity;
+			this.status = status;
 			this.description = description;
 			this.truckPicture = truckPicture;
 			this.staff = staff;
@@ -87,10 +93,11 @@ public class Trucks implements Serializable {
 		}
 
 		public Trucks(@NotNull @Size(min = 1, max = 400) String registrationNo, @NotNull Double capacity,
-				@NotNull String description, String truckPicture, Staffs staff, Companies company) {
+				@NotNull String status, @NotNull String description, String truckPicture, Staffs staff, Companies company) {
 			super();
 			this.registrationNo = registrationNo;
 			this.capacity = capacity;
+			this.status = status;
 			this.description = description;
 			this.truckPicture = truckPicture;
 			this.staff = staff;
@@ -119,6 +126,14 @@ public class Trucks implements Serializable {
 
 		public void setCapacity(Double capacity) {
 			this.capacity = capacity;
+		}
+
+		public String getStatus() {
+			return status;
+		}
+
+		public void setStatus(String status) {
+			this.status = status;
 		}
 
 		public String getDescription() {

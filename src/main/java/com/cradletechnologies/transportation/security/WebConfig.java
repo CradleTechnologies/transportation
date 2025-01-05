@@ -52,6 +52,10 @@ public class WebConfig implements WebMvcConfigurer {
 		Path truckUploadDir = Paths.get("./truck-pictures");
 		String truckUploadPath = truckUploadDir.toFile().getAbsolutePath();
 		registry.addResourceHandler("/truck-pictures/**").addResourceLocations("file:/"+truckUploadPath+"/");
+			
+		Path expenseUploadDir = Paths.get("./expense-proofs");
+		String expenseUploadPath = expenseUploadDir.toFile().getAbsolutePath();
+		registry.addResourceHandler("/expense-proofs/**").addResourceLocations("file:/"+expenseUploadPath+"/");
 		
 	}
 
@@ -66,7 +70,8 @@ public class WebConfig implements WebMvcConfigurer {
 	        String pathPattern7 = "/scanned-documents/**";
 	        String pathPattern8 = "/payment-proofs/**";
 	        String pathPattern9 = "/user-logos/**";
-		registry.addInterceptor(visitorLogger).excludePathPatterns(pathPattern1, pathPattern2, pathPattern3, pathPattern4, pathPattern5, pathPattern6, pathPattern7, pathPattern8, pathPattern9);
+	        String pathPattern10 = "/expense-proofs/**";
+		registry.addInterceptor(visitorLogger).excludePathPatterns(pathPattern1, pathPattern2, pathPattern3, pathPattern4, pathPattern5, pathPattern6, pathPattern7, pathPattern8, pathPattern9, pathPattern10);
 	}
 	
 	 

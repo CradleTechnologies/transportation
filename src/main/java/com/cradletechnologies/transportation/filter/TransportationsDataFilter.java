@@ -23,7 +23,9 @@ public class TransportationsDataFilter implements Specification<Transportations>
 	public Predicate toPredicate(Root<Transportations> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
 		ArrayList<Predicate> predicates = new ArrayList<>();
 		if(userQuery!=null && userQuery!="") {
-			predicates.add(criteriaBuilder.like(root.get("truck").get("registration_no"), '%'+userQuery+'%'));
+			predicates.add(criteriaBuilder.like(root.get("truck").get("registrationNo"), '%'+userQuery+'%'));
+			predicates.add(criteriaBuilder.like(root.get("client").get("clientName"), '%'+userQuery+'%'));
+			predicates.add(criteriaBuilder.like(root.get("area").get("areaName"), '%'+userQuery+'%'));
 		}
 		return(!predicates.isEmpty()?criteriaBuilder.or(predicates.toArray(new Predicate[predicates.size()])):null);
 	}
