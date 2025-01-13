@@ -8,6 +8,7 @@ public class TrucksList_Report {
 	private Date recordDate;
 	private String registrationNo;
 	private String driverName;
+	private String telNo;
 	private Double capacity;
 	private Double transportCharges;
 	private Double amountPaid;
@@ -19,6 +20,22 @@ public class TrucksList_Report {
 	}
 
 	
+	public TrucksList_Report(int id, Date recordDate, String registrationNo, String driverName, String telNo,
+			Double capacity, Double transportCharges, Double amountPaid, String status, Double balance) {
+		super();
+		this.id = id;
+		this.recordDate = recordDate;
+		this.registrationNo = registrationNo;
+		this.driverName = driverName;
+		this.telNo = telNo;
+		this.capacity = capacity;
+		this.transportCharges = transportCharges;
+		this.amountPaid = amountPaid;
+		this.status = status;
+		this.balance = balance;
+	}
+
+
 	public TrucksList_Report(int id, Date recordDate, String registrationNo, String driverName, Double capacity,
 			Double transportCharges, Double amountPaid, String status, Double balance) {
 		super();
@@ -80,6 +97,14 @@ public class TrucksList_Report {
 
 	public void setDriverName(String driverName) {
 		this.driverName = driverName;
+	}
+
+	public String getTelNo() {
+		return telNo;
+	}
+
+	public void setTelNo(String telNo) {
+		this.telNo = telNo;
 	}
 
 	public Double getCapacity() {

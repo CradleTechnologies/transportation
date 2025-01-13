@@ -131,7 +131,7 @@
                 <text><![CDATA[simkeltraders@gmail.com]]></text>
             </staticText>
             <staticText>
-                <reportElement style="Title" x="0" y="46" width="550" height="22"/>
+                <reportElement style="Title" x="0" y="50" width="550" height="22"/>
                 <textElement textAlignment="Center" verticalAlignment="Middle">
                     <font size="18" isBold="false" pdfFontName="Times-Roman"/>
                 </textElement>

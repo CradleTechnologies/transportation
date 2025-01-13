@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio -->
-<jasperReport name="Client List" 
+<jasperReport name="Client Statement" 
     language="java" 
     pageWidth="595" 
     pageHeight="842" 
@@ -31,12 +31,15 @@
     <!-- Field definitions -->
     <field name="id" class="java.lang.Integer"/>
     <field name="clientName" class="java.lang.String"/>
+    <field name="telNo" class="java.lang.String"/>
+    <field name="areaName" class="java.lang.String"/>
     <field name="transport" class="java.lang.Double"/>
     <field name="payment" class="java.lang.Double"/>
     <field name="cashIn" class="java.lang.Double"/>
     <field name="cashOut" class="java.lang.Double"/>
     <field name="status" class="java.lang.String"/>
     <field name="balance" class="java.lang.Double"/>
+    <field name="recordDate" class="java.sql.Date"/>
     
     <!-- Variable definitions -->
     <variable name="totalBalance" class="java.lang.Double" resetType="Report" resetGroup="clientId" calculation="Sum">
@@ -56,27 +59,34 @@
         <band height="120">
             <!-- Title background -->
             <rectangle>
-                <reportElement x="0" y="0" width="555" height="80" backcolor="#CCCCCC" forecolor="#E0E0E0"/>
+                <reportElement x="0" y="0" width="555" height="100" backcolor="#CCCCCC" forecolor="#E0E0E0"/>
             </rectangle>
             
             <!-- Company name -->
             <staticText>
-                <reportElement style="Title" x="0" y="10" width="555" height="30"/>
-                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <reportElement style="Title" x="0" y="10" width="550" height="30"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle"/>
                 <text><![CDATA[SIMKEL TRADERS L.T.D]]></text>
             </staticText>
             
             <!-- Email -->
             <staticText>
-                <reportElement style="SubTitle" x="0" y="40" width="555" height="20"/>
-                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <reportElement style="SubTitle" x="0" y="40" width="550" height="20"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle"/>
                 <text><![CDATA[simkeltraders@gmail.com]]></text>
+            </staticText>
+            
+            <!-- Report Title -->
+            <staticText>
+                <reportElement style="Detail" x="0" y="65" width="550" height="30"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <text><![CDATA[CLIENT STATEMENT]]></text>
             </staticText>
             
             <!-- Timestamp -->
              <textField pattern="EEE, d MMM yyyy HH:mm:ss Z">
-                <reportElement x="0" y="60" width="555" height="20" forecolor="#FFFFFF" style="SubTitle"/>
-                <textElement textAlignment="Center" verticalAlignment="Middle">
+                <reportElement x="0" y="60" width="550" height="20" forecolor="#FFFFFF" style="SubTitle"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
                     <font size="10" isBold="false"/>
                 </textElement>
                 <textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
@@ -93,7 +103,7 @@
             </staticText>
             <staticText>
                 <reportElement x="50" y="93" width="120" height="20" forecolor="#FFFFFF" style="Column header"/>
-                <text><![CDATA[Client Name]]></text>
+                <text><![CDATA[Date]]></text>
             </staticText>
             <staticText>
                 <reportElement x="175" y="93" width="60" height="20" forecolor="#FFFFFF" style="Column header"/>
@@ -118,13 +128,41 @@
             <staticText>
                 <reportElement x="435" y="93" width="50" height="20" forecolor="#FFFFFF" style="Column header"/>
                 <textElement textAlignment="Center"/>
-                <text><![CDATA[Status]]></text>
+                <text><![CDATA[Total]]></text>
             </staticText>
             <staticText>
                 <reportElement x="490" y="93" width="60" height="20" forecolor="#FFFFFF" style="Column header"/>
                 <textElement textAlignment="Center"/>
                 <text><![CDATA[Balance]]></text>
             </staticText>
+             <textField>
+                <reportElement style="Detail" x="8" y="15" width="230" height="12"/>
+                <textElement>
+                    <font size="9"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Client : "+$F{clientName}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement style="Detail" x="8" y="30" width="230" height="12"/>
+                <textElement>
+                    <font size="9"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Status : "+$F{status}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement style="Detail" x="8" y="45" width="230" height="12"/>
+                <textElement>
+                    <font size="9"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Telephone No : "+$F{telNo}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement style="Detail" x="8" y="60" width="230" height="12"/>
+                <textElement>
+                    <font size="9"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Location : "+$F{areaName}]]></textFieldExpression>
+            </textField>
         </band>
     </pageHeader>
     
@@ -153,7 +191,7 @@
             <textField>
                 <reportElement x="50" y="0" width="120" height="19" style="Detail"/>
                 <textElement verticalAlignment="Middle"/>
-                <textFieldExpression><![CDATA[$F{clientName}]]></textFieldExpression>
+                <textFieldExpression><![CDATA[$F{recordDate}]]></textFieldExpression>
             </textField>
             <textField pattern="#,##0;-#,##0">
                 <reportElement x="175" y="0" width="60" height="19" style="Detail"/>
@@ -175,15 +213,15 @@
                 <textElement textAlignment="Center" verticalAlignment="Middle"/>
                 <textFieldExpression><![CDATA[$F{cashOut}]]></textFieldExpression>
             </textField>
-            <textField>
+            <textField pattern="#,##0;-#,##0">
                 <reportElement x="435" y="0" width="50" height="19" style="Detail"/>
                 <textElement textAlignment="Center" verticalAlignment="Middle"/>
-                <textFieldExpression><![CDATA[$F{status}]]></textFieldExpression>
+                <textFieldExpression><![CDATA[$F{balance}]]></textFieldExpression>
             </textField>
             <textField pattern="#,##0;-#,##0">
                 <reportElement x="490" y="0" width="60" height="19" style="Detail"/>
                 <textElement textAlignment="Center" verticalAlignment="Middle"/>
-                <textFieldExpression><![CDATA[$F{balance}]]></textFieldExpression>
+                <textFieldExpression><![CDATA[$V{totalBalance}]]></textFieldExpression>
             </textField>
         </band>
     </detail>

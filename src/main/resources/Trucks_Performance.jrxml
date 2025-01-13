@@ -22,7 +22,7 @@
     <property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="521"/>
 
     <style name="Title" fontName="Times New Roman" fontSize="50" isBold="true" pdfFontName="Times-Bold"/>
-    <style name="SubTitle" forecolor="#736343" fontName="Arial" fontSize="18"/>
+    <style name="SubTitle" forecolor="#736343" fontName="Arial" fontSize="14"/>
     <style name="Column header" forecolor="#666666" fontName="Arial" fontSize="10"/>
     <style name="Detail" fontName="Arial" fontSize="8"/>
     <style name="Row">
@@ -55,6 +55,7 @@
     <field name="id" class="java.lang.Integer"/>
     <field name="registrationNo" class="java.lang.String"/>
     <field name="driverName" class="java.lang.String"/>
+    <field name="telNo" class="java.lang.String"/>
     <field name="capacity" class="java.lang.Double"/>
     <field name="transportCharges" class="java.lang.Double"/>
     <field name="amountPaid" class="java.lang.Double"/>
@@ -131,33 +132,46 @@
                 </textElement>
                 <text><![CDATA[simkeltraders@gmail.com]]></text>
             </staticText>
+             <!-- Report Title -->
+            <staticText>
+                <reportElement style="SubTitle" x="0" y="46" width="550" height="30"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <text><![CDATA[TRUCK PERFORMANCE]]></text>
+            </staticText>
             <textField>
-                <reportElement style="Detail" x="8" y="15" width="230" height="12"/>
+                <reportElement style="Detail" x="8" y="5" width="230" height="12"/>
                 <textElement>
                     <font size="9"/>
                 </textElement>
                 <textFieldExpression><![CDATA["Truck : "+$F{registrationNo}]]></textFieldExpression>
             </textField>
             <textField>
-                <reportElement style="Detail" x="8" y="30" width="230" height="12"/>
+                <reportElement style="Detail" x="8" y="19" width="230" height="12"/>
                 <textElement>
                     <font size="9"/>
                 </textElement>
                 <textFieldExpression><![CDATA["Status : "+$F{status}]]></textFieldExpression>
             </textField>
             <textField pattern="#,##0;-#,##0">
-                <reportElement style="Detail" x="8" y="45" width="230" height="12"/>
+                <reportElement style="Detail" x="8" y="33" width="230" height="12"/>
                 <textElement>
                     <font size="9"/>
                 </textElement>
                 <textFieldExpression><![CDATA["Capacity : "+$F{capacity}]]></textFieldExpression>
             </textField>
             <textField>
-                <reportElement style="Detail" x="8" y="60" width="230" height="12"/>
+                <reportElement style="Detail" x="8" y="47" width="230" height="12"/>
                 <textElement>
                     <font size="9"/>
                 </textElement>
                 <textFieldExpression><![CDATA["Driver : "+$F{driverName}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement style="Detail" x="8" y="61" width="230" height="12"/>
+                <textElement>
+                    <font size="9"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Contacts : "+$F{telNo}]]></textFieldExpression>
             </textField>
         </band>
     </pageHeader>

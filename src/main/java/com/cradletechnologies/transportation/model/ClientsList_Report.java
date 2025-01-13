@@ -9,6 +9,8 @@ public class ClientsList_Report {
 	private String firstName;
 	private String lastName;
 	private String clientName;
+	private String telNo;
+	private String areaName;
 	private Double transport;
 	private Double payment;
 	private Double cashIn;
@@ -21,6 +23,26 @@ public class ClientsList_Report {
 	}
 
 	
+	public ClientsList_Report(int id, Date recordDate, String firstName, String lastName, String clientName,
+			String telNo, String areaName, Double transport, Double payment, Double cashIn, Double cashOut,
+			String status, Double balance) {
+		super();
+		this.id = id;
+		this.recordDate = recordDate;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.clientName = clientName;
+		this.telNo = telNo;
+		this.areaName = areaName;
+		this.transport = transport;
+		this.payment = payment;
+		this.cashIn = cashIn;
+		this.cashOut = cashOut;
+		this.status = status;
+		this.balance = balance;
+	}
+
+
 	public ClientsList_Report(int id, Date recordDate, String firstName, String lastName, String clientName,
 			Double transport, Double payment, Double cashIn, Double cashOut, String status, Double balance) {
 		super();
@@ -126,6 +148,22 @@ public class ClientsList_Report {
 
 	public void setClientName(String clientName) {
 		this.clientName = clientName;
+	}
+
+	public String getTelNo() {
+		return telNo;
+	}
+
+	public void setTelNo(String telNo) {
+		this.telNo = telNo;
+	}
+
+	public String getAreaName() {
+		return areaName;
+	}
+
+	public void setAreaName(String areaName) {
+		this.areaName = areaName;
 	}
 
 	public Double getTransport() {

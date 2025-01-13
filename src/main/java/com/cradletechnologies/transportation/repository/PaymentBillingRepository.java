@@ -56,13 +56,14 @@ public interface PaymentBillingRepository
 	void fillPaymentBilling_CashOut();
 
 	// Client Balances Report
-	@Query("SELECT DISTINCT new com.cradletechnologies.transportation.model.ClientsList_Report(c.id, c.firstName, c.lastName, c.clientName, COALESCE(sum(t.transportCharges),0), COALESCE(-sum(pm.amountPaid),0), -COALESCE(sum(ci.amount),0), COALESCE(sum(co.amount),0), c.status,  COALESCE(-sum(pm.amountPaid),0)+COALESCE(sum(t.transportCharges),0)-COALESCE(sum(ci.amount),0)+COALESCE(sum(co.amount),0) ) \r\n"
+	@Query("SELECT DISTINCT new com.cradletechnologies.transportation.model.ClientsList_Report(c.id, date(pb.recordDate), c.firstName, c.lastName, c.clientName, c.telNo, a.areaName, COALESCE(sum(t.transportCharges),0), COALESCE(-sum(pm.amountPaid),0), -COALESCE(sum(ci.amount),0), COALESCE(sum(co.amount),0), c.status,  COALESCE(-sum(pm.amountPaid),0)+COALESCE(sum(t.transportCharges),0)-COALESCE(sum(ci.amount),0)+COALESCE(sum(co.amount),0) ) \r\n"
 			+ "FROM PaymentBilling pb \r\n" 
 			+ "LEFT JOIN Clients c ON pb.clientId = c.id \r\n"
 			+ "LEFT JOIN Transportations t ON pb.transportationId = t.id \r\n"
 			+ "LEFT JOIN Payments pm ON pb.paymentId = pm.id \r\n" 
 			+ "LEFT JOIN CashIn ci ON pb.cashInId = ci.id \r\n"
 			+ "LEFT JOIN CashOut co ON pb.cashOutId = co.id \r\n" 
+			+ "LEFT JOIN Areas a ON c.area.id = a.id \r\n" 
 			+ "WHERE c.status = 'ACTIVE' \r\n"
 			+ "GROUP BY c.id \r\n" 
 			+ "ORDER BY c.id ASC")
@@ -79,19 +80,20 @@ public interface PaymentBillingRepository
 			+"ORDER BY te.truckId ASC")
 	public List<TrucksList_Report> getTrucksListReport();
 
-	@Query("SELECT DISTINCT new com.cradletechnologies.transportation.model.ClientsList_Report(c.id, date(pb.recordDate), c.firstName, c.lastName, c.clientName, COALESCE(sum(t.transportCharges),0), COALESCE(-sum(pm.amountPaid),0), -COALESCE(sum(ci.amount),0), COALESCE(sum(co.amount),0), c.status,  COALESCE(-sum(pm.amountPaid),0)+COALESCE(sum(t.transportCharges),0)-COALESCE(sum(ci.amount),0)+COALESCE(sum(co.amount),0) ) \r\n"
+	@Query("SELECT DISTINCT new com.cradletechnologies.transportation.model.ClientsList_Report(c.id, date(pb.recordDate), c.firstName, c.lastName, c.clientName, c.telNo, a.areaName, COALESCE(sum(t.transportCharges),0), COALESCE(-sum(pm.amountPaid),0), -COALESCE(sum(ci.amount),0), COALESCE(sum(co.amount),0), c.status,  COALESCE(-sum(pm.amountPaid),0)+COALESCE(sum(t.transportCharges),0)-COALESCE(sum(ci.amount),0)+COALESCE(sum(co.amount),0) ) \r\n"
 			+ "FROM PaymentBilling pb \r\n" 
 			+ "LEFT JOIN Clients c ON pb.clientId = c.id \r\n"
 			+ "LEFT JOIN Transportations t ON pb.transportationId = t.id \r\n"
 			+ "LEFT JOIN Payments pm ON pb.paymentId = pm.id \r\n" 
 			+ "LEFT JOIN CashIn ci ON pb.cashInId = ci.id \r\n"
 			+ "LEFT JOIN CashOut co ON pb.cashOutId = co.id \r\n" 
+			+ "LEFT JOIN Areas a ON c.area.id = a.id \r\n" 
 			+ "WHERE c.id = :CLIENT_ID \r\n"
 			+ "GROUP BY pb.recordDate \r\n" 
 			+ "ORDER BY pb.recordDate ASC")
 	List<ClientsList_Report> getClientStatementReport(@Param("CLIENT_ID")int CLIENT_ID);
 
-	@Query("SELECT DISTINCT new com.cradletechnologies.transportation.model.TrucksList_Report( t.id, date(te.recordDate), t.registrationNo, CONCAT(s.staffName, '  \t Telephone: ', s.telNo), t.capacity, COALESCE(sum(tr.transportCharges),0), COALESCE(sum(e.amountPaid),0), t.status, COALESCE(sum(tr.transportCharges),0)-COALESCE(sum(e.amountPaid),0) ) \r\n"
+	@Query("SELECT DISTINCT new com.cradletechnologies.transportation.model.TrucksList_Report( t.id, date(te.recordDate), t.registrationNo, s.staffName, s.telNo, t.capacity, COALESCE(sum(tr.transportCharges),0), COALESCE(sum(e.amountPaid),0), t.status, COALESCE(sum(tr.transportCharges),0)-COALESCE(sum(e.amountPaid),0) ) \r\n"
 			+ "FROM TransportExpenses te \r\n"
 			+ "LEFT JOIN Trucks t ON te.truckId = t.id \r\n"
 			+ "LEFT JOIN Transportations tr ON te.transportId = tr.id \r\n"

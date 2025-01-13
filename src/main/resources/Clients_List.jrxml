@@ -56,31 +56,39 @@
         <band height="120">
             <!-- Title background -->
             <rectangle>
-                <reportElement x="0" y="0" width="555" height="80" backcolor="#CCCCCC" forecolor="#E0E0E0"/>
+                <reportElement x="0" y="0" width="555" height="100" backcolor="#CCCCCC" forecolor="#E0E0E0"/>
             </rectangle>
             
             <!-- Company name -->
             <staticText>
-                <reportElement style="Title" x="0" y="10" width="555" height="30"/>
+                <reportElement style="Title" x="0" y="5" width="555" height="30"/>
                 <textElement textAlignment="Center" verticalAlignment="Middle"/>
                 <text><![CDATA[SIMKEL TRADERS L.T.D]]></text>
             </staticText>
             
             <!-- Email -->
             <staticText>
-                <reportElement style="SubTitle" x="0" y="40" width="555" height="20"/>
+                <reportElement style="SubTitle" x="0" y="33" width="555" height="20"/>
                 <textElement textAlignment="Center" verticalAlignment="Middle"/>
                 <text><![CDATA[simkeltraders@gmail.com]]></text>
             </staticText>
             
             <!-- Timestamp -->
              <textField pattern="EEE, d MMM yyyy HH:mm:ss Z">
-                <reportElement x="0" y="60" width="555" height="20" forecolor="#FFFFFF" style="SubTitle"/>
+                <reportElement x="0" y="50" width="555" height="20" forecolor="#FFFFFF" style="SubTitle"/>
                 <textElement textAlignment="Center" verticalAlignment="Middle">
                     <font size="10" isBold="false"/>
                 </textElement>
                 <textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
             </textField>
+            
+             <!-- Report Title -->
+            <staticText>
+                <reportElement style="SubTitle" x="0" y="70" width="555" height="20"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <text><![CDATA[CLIENT BALANCES]]></text>
+            </staticText>
+            
             <!-- Column headers background -->
             <rectangle>
                 <reportElement x="0" y="90" width="555" height="25" backcolor="#000000" forecolor="#000000"/>
@@ -221,7 +229,7 @@
             <staticText>
                 <reportElement x="10" y="10" width="270" height="40" forecolor="#333333" style="Title"/>
                 <textElement textAlignment="Right" verticalAlignment="Middle"/>
-                <text><![CDATA[TOTAL TRANSPORT BALANCE:]]></text>
+                <text><![CDATA[TOTAL BALANCE:]]></text>
             </staticText>
             <textField pattern="#,##0.00;-#,##0.00">
                 <reportElement x="290" y="10" width="255" height="40" style="Title"/>
