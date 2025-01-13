@@ -1,8 +1,11 @@
 package com.cradletechnologies.transportation.model;
 
+import java.util.Date;
+
 public class ClientsList_Report {
 
 	private int id;
+	private Date recordDate;
 	private String firstName;
 	private String lastName;
 	private String clientName;
@@ -16,6 +19,24 @@ public class ClientsList_Report {
 	public ClientsList_Report() {
 
 	}
+
+	
+	public ClientsList_Report(int id, Date recordDate, String firstName, String lastName, String clientName,
+			Double transport, Double payment, Double cashIn, Double cashOut, String status, Double balance) {
+		super();
+		this.id = id;
+		this.recordDate = recordDate;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.clientName = clientName;
+		this.transport = transport;
+		this.payment = payment;
+		this.cashIn = cashIn;
+		this.cashOut = cashOut;
+		this.status = status;
+		this.balance = balance;
+	}
+
 
 	public ClientsList_Report(int id, String firstName, String lastName, String clientName, Double transport,
 			Double payment, Double cashIn, Double cashOut, String status, Double balance) {
@@ -72,6 +93,16 @@ public class ClientsList_Report {
 	public void setId(int id) {
 		this.id = id;
 	}
+
+	public Date getRecordDate() {
+		return recordDate;
+	}
+
+
+	public void setRecordDate(Date recordDate) {
+		this.recordDate = recordDate;
+	}
+
 
 	public String getFirstName() {
 		return firstName;

@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+    name="Trucks_List" 
+    language="java" 
+    pageWidth="595" 
+    pageHeight="842" 
+    columnWidth="555" 
+    leftMargin="20" 
+    rightMargin="20" 
+    topMargin="20" 
+    bottomMargin="20">
+    
+    <property name="ireport.zoom" value="1.8150000000000004"/>
+    <property name="ireport.x" value="0"/>
+    <property name="ireport.y" value="0"/>
+    <property name="com.jaspersoft.studio.data.defaultdataadapter" value="transportDataAdapter"/>
+    <property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+    <property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="479"/>
+    <property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="521"/>
+
+    <style name="Title" fontName="Times New Roman" fontSize="50" isBold="true" pdfFontName="Times-Bold"/>
+    <style name="SubTitle" forecolor="#736343" fontName="Arial" fontSize="18"/>
+    <style name="Column header" forecolor="#666666" fontName="Arial" fontSize="10"/>
+    <style name="Detail" fontName="Arial" fontSize="8"/>
+    <style name="Row">
+        <conditionalStyle>
+            <conditionExpression><![CDATA[$V{REPORT_COUNT} % 2 == 0]]></conditionExpression>
+            <style backcolor="#E0E0E0"/>
+        </conditionalStyle>
+    </style>
+
+    <parameter name="TRUCK_ID" class="java.lang.Integer"/>
+
+    <!--queryString>
+        <![CDATA[
+        SELECT DISTINCT t.id, te.recordDate, t.registrationNo, s.staff_Name, t.capacity, 
+            COALESCE(sum(tr.transportCharges),0) as transportCharges, 
+            COALESCE(sum(e.amountPaid),0) as amountPaid, 
+            t.status,  
+            COALESCE(sum(tr.transportCharges),0)-COALESCE(sum(e.amountPaid),0) as balance 
+        FROM Transport_Expenses te 
+        LEFT JOIN Trucks t ON te.truck_Id = t.id 
+        LEFT JOIN Transportations tr ON te.transport_Id = tr.id 
+        LEFT JOIN Expenses e ON te.expense_Id = e.id 
+        LEFT JOIN Staffs s ON t.staff_Id = s.id 
+        GROUP BY te.truck_Id, t.id, t.registrationNo, s.staff_Name, t.capacity, t.status
+        ORDER BY te.truck_Id ASC
+        ]]>
+    </queryString-->
+
+    <field name="id" class="java.lang.Integer"/>
+    <field name="registrationNo" class="java.lang.String"/>
+    <field name="driverName" class="java.lang.String"/>
+    <field name="capacity" class="java.lang.Double"/>
+    <field name="transportCharges" class="java.lang.Double"/>
+    <field name="amountPaid" class="java.lang.Double"/>
+    <field name="status" class="java.lang.String"/>
+    <field name="balance" class="java.lang.Double"/>
+    <field name="recordDate" class="java.sql.Date"/>
+
+    <variable name="totalBalance" class="java.lang.Double" calculation="Sum">
+        <variableExpression><![CDATA[$F{balance}]]></variableExpression>
+    </variable>
+
+    <group name="truckId">
+        <groupExpression><![CDATA[$F{id}]]></groupExpression>
+        <groupFooter>
+            <band/>
+        </groupFooter>
+    </group>
+
+    <pageHeader>
+        <band height="101">
+            <rectangle>
+                <reportElement x="0" y="72" width="555" height="27" forecolor="#009999" backcolor="#009999"/>
+            </rectangle>
+            <staticText>
+                <reportElement style="Column header" x="11" y="76" width="22" height="15" forecolor="#FFFF00"/>
+                <text><![CDATA[ID]]></text>
+            </staticText>
+            <staticText>
+                <reportElement style="Column header" x="40" y="76" width="115" height="15" forecolor="#FFFF00"/>
+                <textElement textAlignment="Center"/>
+                <text><![CDATA[Truck]]></text>
+            </staticText>
+            <staticText>
+                <reportElement style="Column header" x="410" y="76" width="43" height="15" forecolor="#FFFF00"/>
+                <textElement textAlignment="Center"/>
+                <text><![CDATA[Balance]]></text>
+            </staticText>
+            <staticText>
+                <reportElement style="Column header" x="470" y="76" width="80" height="15" forecolor="#FFFF00"/>
+                <textElement textAlignment="Center"/>
+                <text><![CDATA[Status]]></text>
+            </staticText>
+            <staticText>
+                <reportElement style="Column header" x="297" y="76" width="46" height="15" forecolor="#FFFF00"/>
+                <textElement textAlignment="Center"/>
+                <text><![CDATA[Expenses]]></text>
+            </staticText>
+            <staticText>
+                <reportElement style="Column header" x="174" y="76" width="52" height="15" forecolor="#FFFF00"/>
+                <textElement textAlignment="Center"/>
+                <text><![CDATA[Transport]]></text>
+            </staticText>
+            <rectangle>
+                <reportElement x="0" y="0" width="555" height="73" forecolor="#CCCCCC" backcolor="#CCCCCC"/>
+            </rectangle>
+            <textField pattern="EEE, d MMM yyyy HH:mm:ss Z">
+                <reportElement style="Column header" x="353" y="52" width="197" height="20" forecolor="#FFFFFF"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font size="10" isBold="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement style="Title" x="0" y="0" width="550" height="29"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="24" pdfFontName="Times-Roman"/>
+                </textElement>
+                <text><![CDATA[SIMKEL TRADERS L.T.D]]></text>
+            </staticText>
+            <staticText>
+                <reportElement style="Title" x="0" y="29" width="550" height="17"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="14" isBold="false" pdfFontName="Times-Roman"/>
+                </textElement>
+                <text><![CDATA[simkeltraders@gmail.com]]></text>
+            </staticText>
+            <staticText>
+                <reportElement style="Title" x="0" y="46" width="550" height="22"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="18" isBold="false" pdfFontName="Times-Roman"/>
+                </textElement>
+                <text><![CDATA[TRUCKS REPORT]]></text>
+            </staticText>
+            
+        </band>
+    </pageHeader>
+
+     <detail>
+        <band height="23">
+            <rectangle>
+                <reportElement style="Row" x="1" y="4" width="555" height="19"/>
+                <graphicElement>
+                    <pen lineWidth="0.0"/>
+                </graphicElement>
+            </rectangle>
+            <textField pattern="#,##0.00;-#,##0.00">
+                <reportElement style="Detail" x="398" y="6" width="62" height="15"/>
+                <textElement textAlignment="Center">
+                    <font size="9"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{status}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement style="Detail" x="6" y="6" width="29" height="15"/>
+                <textElement textAlignment="Center">
+                    <font size="9"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+            </textField>
+            <line>
+                <reportElement x="1" y="1" width="556" height="1" forecolor="#CCFFCC"/>
+            </line>
+            <textField pattern="#,##0.00;-#,##0.00">
+                <reportElement style="Detail" x="470" y="6" width="80" height="15"/>
+                <textElement textAlignment="Center">
+                    <font size="9" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{balance}]]></textFieldExpression>
+            </textField>
+            <textField pattern="#,##0.00;-#,##0.00">
+                <reportElement style="Detail" x="283" y="6" width="70" height="15"/>
+                <textElement textAlignment="Center">
+                    <font size="9" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{amountPaid}]]></textFieldExpression>
+            </textField>
+            <textField pattern="#,##0.00;-#,##0.00">
+                <reportElement style="Detail" x="165" y="6" width="70" height="15"/>
+                <textElement textAlignment="Center">
+                    <font size="9" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{transportCharges}]]></textFieldExpression>
+            </textField>
+            <textField pattern="dd/MM/yyyy">
+                <reportElement style="Detail" x="40" y="6" width="114" height="15"/>
+                <textElement textAlignment="Center">
+                    <font size="9"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{registrationNo}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+
+    <pageFooter>
+        <band height="38">
+            <rectangle>
+                <reportElement x="-21" y="10" width="597" height="24" forecolor="#000000" backcolor="#000000"/>
+            </rectangle>
+            <textField evaluationTime="Report">
+                <reportElement style="Column header" x="533" y="10" width="40" height="20" forecolor="#FFFFFF"/>
+                <textElement verticalAlignment="Middle">
+                    <font size="10" isBold="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement style="Column header" x="453" y="10" width="80" height="20" forecolor="#FFFFFF"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font size="10" isBold="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+            </textField>
+            <textField pattern="EEE, d MMM yyyy HH:mm:ss Z">
+                <reportElement style="Column header" x="10" y="10" width="197" height="20" forecolor="#FFFFFF"/>
+                <textElement verticalAlignment="Middle">
+                    <font size="10" isBold="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+            </textField>
+        </band>
+    </pageFooter>
+
+    <summary>
+        <band height="55">
+            <textField pattern="#,##0.00;-#,##0.00">
+                <reportElement mode="Opaque" x="277" y="2" width="270" height="53" backcolor="#CCFFCC"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="36" isBold="true" isUnderline="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$V{totalBalance}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement mode="Opaque" x="8" y="3" width="262" height="42" forecolor="#FF3333" backcolor="#CCFFCC"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="24" isBold="false"/>
+                </textElement>
+                <text><![CDATA[TRUCK BALANCE :]]></text>
+            </staticText>
+        </band>
+    </summary>
+</jasperReport>

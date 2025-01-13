@@ -24,8 +24,10 @@ public interface PaymentBillingService {
 	
 	List<PaymentBilling> listPaymentBilling();
 	
-	List<ClientsList_Report> getClientsListReport();
-		
+	List<ClientsList_Report> getClientsListReport();		
+
+	List<ClientsList_Report> getClientStatementReport(int CLIENT_ID);
+	
 	int countClients();
 	
 //	Double totalRevenue();

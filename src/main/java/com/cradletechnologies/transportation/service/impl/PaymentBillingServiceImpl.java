@@ -67,6 +67,12 @@ public class PaymentBillingServiceImpl implements PaymentBillingService{
 		return paymentBillingRepository.getClientsListReport();
 	}
 
+	
+	@Override
+	public List<ClientsList_Report> getClientStatementReport(int CLIENT_ID) {
+		return paymentBillingRepository.getClientStatementReport(CLIENT_ID);
+	}
+	
 
 	@Override
 	public int countClients() {		

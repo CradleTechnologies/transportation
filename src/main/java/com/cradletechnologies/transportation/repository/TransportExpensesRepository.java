@@ -49,7 +49,7 @@ public interface TransportExpensesRepository  extends JpaRepository<TransportExp
 	
 	
 	//Reports
-	@Query("SELECT DISTINCT new com.cradletechnologies.transportation.model.TrucksList_Report(t.id, t.registrationNo, t.staff.staffName, t.capacity, t.status,  COALESCE(sum(tr.transportCharges),0)-COALESCE(sum(e.amountPaid),0) ) \r\n"
+	@Query("SELECT DISTINCT new com.cradletechnologies.transportation.model.TrucksList_Report(t.id, t.registrationNo, t.staff.staffName, t.capacity, COALESCE(sum(tr.transportCharges),0), COALESCE(sum(e.amountPaid),0), t.status, COALESCE(sum(tr.transportCharges),0)-COALESCE(sum(e.amountPaid),0) ) \r\n"
 			+ "FROM TransportExpenses te \r\n"
 			+ "LEFT JOIN Trucks t ON te.truckId = t.id \r\n"
 			+ "LEFT JOIN Transportations tr ON te.transportId = tr.id \r\n"
@@ -88,7 +88,7 @@ public interface TransportExpensesRepository  extends JpaRepository<TransportExp
 //	
 //
 //
-	@Query("SELECT DISTINCT new com.cradletechnologies.transportation.model.TrucksList_Report(t.id, t.registrationNo, t.staff.staffName, t.capacity, t.status,  COALESCE(sum(tr.transportCharges),0)-COALESCE(sum(e.amountPaid),0) ) \r\n"
+	@Query("SELECT DISTINCT new com.cradletechnologies.transportation.model.TrucksList_Report(t.id, te.recordDate, t.registrationNo, t.staff.staffName, t.capacity, COALESCE(sum(tr.transportCharges),0), COALESCE(sum(e.amountPaid),0), t.status, COALESCE(sum(tr.transportCharges),0)-COALESCE(sum(e.amountPaid),0) ) \r\n"
 			+ "FROM TransportExpenses te \r\n"
 			+ "LEFT JOIN Trucks t ON te.truckId = t.id \r\n"
 			+ "LEFT JOIN Transportations tr ON te.transportId = tr.id \r\n"
